@@ -24,6 +24,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
     route::get('profile', 'UserProfile@index')->name('profile');
     route::patch('profile-update', 'UserProfile@profileUpdate')->name('profile.update');
     route::patch('password-update', 'UserProfile@passwordUpdate')->name('password-update');
+    route::resource('hobbies-facts', 'HobbyFactController');
 
 
 });
