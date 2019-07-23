@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c38f47f-0d2e-4b02-b24c-b35c9e79546c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/admin/hobby-fact/create.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/admin/hobby-fact/index.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/User.php" afterPath="$PROJECT_DIR$/app/User.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/web.php" afterPath="$PROJECT_DIR$/routes/web.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,7 +16,7 @@
       <file leaf-file-name="web.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/web.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="226">
+            <state relative-caret-position="220">
               <caret line="19" column="116" lean-forward="false" selection-start-line="19" selection-start-column="116" selection-end-line="19" selection-end-column="116" />
               <folding />
             </state>
@@ -30,7 +26,7 @@
       <file leaf-file-name="HobbyFactController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/HobbyFactController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="341">
+            <state relative-caret-position="880">
               <caret line="41" column="68" lean-forward="false" selection-start-line="41" selection-start-column="68" selection-end-line="41" selection-end-column="68" />
               <folding />
             </state>
@@ -64,7 +60,7 @@
       <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/admin/hobby-fact/index.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="338">
+            <state relative-caret-position="660">
               <caret line="30" column="77" lean-forward="false" selection-start-line="30" selection-start-column="77" selection-end-line="30" selection-end-column="77" />
               <folding>
                 <marker date="1563648891359" expanded="false" signature="3257:3275" ph="..." />
@@ -77,12 +73,9 @@
       <file leaf-file-name="create.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/admin/hobby-fact/create.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1364">
-              <caret line="60" column="0" lean-forward="true" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
-              <folding>
-                <element signature="e#734#759#0#HTML" expanded="true" />
-                <element signature="e#2537#2563#0#HTML" expanded="true" />
-              </folding>
+            <state relative-caret-position="352">
+              <caret line="16" column="19" lean-forward="false" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -90,8 +83,8 @@
       <file leaf-file-name="create.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/admin/users/create.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="784">
-              <caret line="73" column="30" lean-forward="true" selection-start-line="73" selection-start-column="30" selection-end-line="73" selection-end-column="30" />
+            <state relative-caret-position="1606">
+              <caret line="73" column="30" lean-forward="false" selection-start-line="73" selection-start-column="30" selection-end-line="73" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -211,7 +204,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -275,6 +267,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -323,17 +316,18 @@
       <workItem from="1563289436190" duration="7523000" />
       <workItem from="1563346581965" duration="15721000" />
       <workItem from="1563525255525" duration="11971000" />
-      <workItem from="1563644847151" duration="8147000" />
+      <workItem from="1563644847151" duration="8321000" />
+      <workItem from="1563858278465" duration="805000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="81389000" />
+    <option name="totallyTimeSpent" value="82368000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23748212" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24034335" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -502,7 +496,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="352">
           <caret line="18" column="56" lean-forward="true" selection-start-line="18" selection-start-column="56" selection-end-line="18" selection-end-column="56" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -510,7 +503,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="19" column="23" lean-forward="false" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -540,7 +532,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1122">
           <caret line="51" column="61" lean-forward="false" selection-start-line="51" selection-start-column="61" selection-end-line="51" selection-end-column="61" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -597,7 +588,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2926">
           <caret line="133" column="0" lean-forward="false" selection-start-line="133" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -605,7 +595,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="261">
           <caret line="19" column="36" lean-forward="false" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -613,7 +602,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="226">
           <caret line="194" column="10" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="204" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -621,18 +609,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="435">
           <caret line="26" column="34" lean-forward="false" selection-start-line="26" selection-start-column="34" selection-end-line="26" selection-end-column="34" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/HobbyFactsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/HobbyFactsController.php" />
     <entry file="file://$PROJECT_DIR$/app/User.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="458">
@@ -643,7 +623,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/web.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
+        <state relative-caret-position="220">
           <caret line="19" column="116" lean-forward="false" selection-start-line="19" selection-start-column="116" selection-end-line="19" selection-end-column="116" />
           <folding />
         </state>
@@ -653,14 +633,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="263">
           <caret line="114" column="5" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="146" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/users/create.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="784">
-          <caret line="73" column="30" lean-forward="true" selection-start-line="73" selection-start-column="30" selection-end-line="73" selection-end-column="30" />
+        <state relative-caret-position="1606">
+          <caret line="73" column="30" lean-forward="false" selection-start-line="73" selection-start-column="30" selection-end-line="73" selection-end-column="30" />
           <folding />
         </state>
       </provider>
@@ -675,7 +654,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/HobbyFactController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="341">
+        <state relative-caret-position="880">
           <caret line="41" column="68" lean-forward="false" selection-start-line="41" selection-start-column="68" selection-end-line="41" selection-end-column="68" />
           <folding />
         </state>
@@ -683,7 +662,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/hobby-fact/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
+        <state relative-caret-position="660">
           <caret line="30" column="77" lean-forward="false" selection-start-line="30" selection-start-column="77" selection-end-line="30" selection-end-column="77" />
           <folding>
             <marker date="1563648891359" expanded="false" signature="3257:3275" ph="..." />
@@ -694,12 +673,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/hobby-fact/create.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1364">
-          <caret line="60" column="0" lean-forward="true" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
-          <folding>
-            <element signature="e#734#759#0#HTML" expanded="true" />
-            <element signature="e#2537#2563#0#HTML" expanded="true" />
-          </folding>
+        <state relative-caret-position="352">
+          <caret line="16" column="19" lean-forward="false" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
+          <folding />
         </state>
       </provider>
     </entry>
