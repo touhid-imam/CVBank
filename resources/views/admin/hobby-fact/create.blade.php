@@ -70,7 +70,7 @@
                         <div class="fact-wrapper">
                             <h3 class="text-center">Fact Section</h3>
                             <div class="form-group">
-                                <select class="form-control" name="hobby_icon" id="hobby_icon">
+                                <select class="form-control" name="fact_icon" id="fact_icon">
                                     @if($icon_options)
                                         @foreach($icon_options as $key => $icon_option)
                                             <option value="{{ $key }}">{{ $icon_option }}</option>

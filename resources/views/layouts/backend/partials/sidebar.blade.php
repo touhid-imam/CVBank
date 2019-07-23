@@ -16,6 +16,15 @@
                             </ul>
                         </div>
                     </li>
+                    <li>
+                        <a {{ Request::is('admin/hobbies-facts*') ? 'class=active' : 'class=collapsed'}} href="#hobby-fact" data-toggle="collapse"><i class="lnr lnr-thumbs-up"></i> <span>Facts Management</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+                        <div id="hobby-fact" {{ Request::is('admin/hobbies-facts*') ? 'class="collapse in"' : 'class=collapse'}}>
+                            <ul class="nav">
+                                <li><a {{ Request::is('admin/hobbies-facts') ? 'class=active' : ' '}} href="{{ route('admin.hobbies-facts.index') }}">All Hobby & Fact</a></li>
+                                <li><a {{ Request::is('admin/hobbies-facts/create') ? 'class=active' : ' '}} href="{{ route ('admin.hobbies-facts.create') }}">Create Hobby & Fact</a></li>
+                            </ul>
+                        </div>
+                    </li>
 
 
                     <li><a href="elements.html" class=""><i class="lnr lnr-code"></i> <span>Elements</span></a></li>

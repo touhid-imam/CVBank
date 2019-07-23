@@ -43,69 +43,64 @@
                                 <tr>
                                     <th>No.</th>
                                     <th>Author</th>
-                                    <th>Hobby Icon</th>
-                                    <th>Hobby Text</th>
                                     <th>Hobby Status</th>
-                                    <th>Fact Icon</th>
-                                    <th>Fact Heading</th>
+                                    <th>Hobby Icon</th>
                                     <th>Fact Status</th>
+                                    <th>Fact Icon</th>
                                     <th>Created At</th>
                                     <th>Updated At</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {{--@foreach($users as $user)--}}
-                                    {{--@if(Auth::user()->id != $user->id)--}}
-                                        {{--<tr>--}}
-                                            {{--<td>{{ $user->name }}</td>--}}
-                                            {{--<td>{{ $user->role->name }}</td>--}}
-                                            {{--<td>{{ $user->email }}</td>--}}
-                                            {{--<td>{{ $user->phone }}</td>--}}
-                                            {{--<td>{{ $user->availability == 0 ? 'Unavailable' : 'Available' }}</td>--}}
-                                            {{--<td>{{ $user->created_at ? $user->created_at->diffForHumans() : ' ' }}</td>--}}
-                                            {{--<td>{{ $user->updated_at ? $user->updated_at->diffForHumans() : ' ' }}</td>--}}
-                                            {{--<td class="text-center" style="padding-left: 5px;">--}}
-                                                {{--<ul class="tbl-action-btn">--}}
-                                                    {{--<li>--}}
-                                                        {{--<a href="{{ route('admin.users.show', $user->id) }}" class="btn btn-primary btn-xs text-center">--}}
-                                                            {{--<span class="lnr lnr-eye tb-btn"></span>--}}
+                                @foreach($hobbyFacts as $key => $hobbyFact)
+                                        <tr>
+                                            <td>{{ $key + 1 }}</td>
+                                            <td>{{ $hobbyFact->user->name }}</td>
+                                            <td>
+                                                <span class="label label-{{ $hobbyFact->hobby_status == 1 ? 'success' : 'danger'}}">{{ $hobbyFact->hobby_status == 1 ? 'Active' : 'Not Active'}}</span>
+                                            </td>
+                                            <td><i class="{{ $hobbyFact->hobby_icon}}"></i></td>
+                                            <td>
+                                                <span class="label label-{{ $hobbyFact->fact_status == 1 ? 'success' : 'danger'}}">{{ $hobbyFact->fact_status == 1 ? 'Active' : 'Not Active'}}</span>
+                                            </td>
+                                            <td><i class="{{ $hobbyFact->fact_icon}}"></i></td>
+                                            <td>{{ $hobbyFact->created_at ? $hobbyFact->created_at->diffForHumans() : ' ' }}</td>
+                                            <td>{{ $hobbyFact->updated_at ? $hobbyFact->updated_at->diffForHumans() : ' ' }}</td>
+                                            <td class="text-center" style="padding-left: 5px;">
+                                                <ul class="tbl-action-btn">
+                                                    <li>
+                                                        <a href="{{ route('admin.hobbies-facts.show', $hobbyFact->id) }}" class="btn btn-primary btn-xs text-center">
+                                                            <span class="lnr lnr-eye tb-btn"></span>
 
-                                                        {{--</a>--}}
-                                                    {{--</li>--}}
-                                                    {{--<li>--}}
-                                                        {{--<a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-info btn-xs text-center"><span class="lnr lnr-sync left tb-btn"></span></a>--}}
-                                                    {{--</li>--}}
-                                                    {{--@if(!($user->role->id == 1))--}}
-                                                        {{--<li>--}}
-                                                            {{--<button class="btn btn-danger btn-xs" onclick="deleteUser({{ $user->id }})"><span class="lnr lnr-trash left tb-btn"></span></button>--}}
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="{{ route('admin.hobbies-facts.edit', $hobbyFact->id) }}" class="btn btn-info btn-xs text-center"><span class="lnr lnr-sync left tb-btn"></span></a>
+                                                    </li>
+
+                                                        <li>
+                                                            <button class="btn btn-danger btn-xs" onclick="deleteUser({{ $hobbyFact->id }})"><span class="lnr lnr-trash left tb-btn"></span></button>
 
                                                             {{--<form id="delete-form-{{ $user->id }}" action="{{ route('admin.users.destroy', $user->id)}}" method="POST" style="display: none;">--}}
                                                                 {{--@csrf--}}
                                                                 {{--@method('DELETE')--}}
                                                             {{--</form>--}}
-                                                        {{--</li>--}}
-                                                    {{--@else--}}
-                                                        {{--<button id="admin-delete" class="btn btn-danger btn-xs" disabled>--}}
-                                                            {{--<span class="lnr lnr-trash left tb-btn"></span>--}}
-                                                        {{--</button>--}}
-                                                    {{--@endif--}}
-                                                {{--</ul>--}}
-                                            {{--</td>--}}
-                                        {{--</tr>--}}
-                                    {{--@endif--}}
-                                {{--@endforeach--}}
+                                                        </li>
+
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                @endforeach
                                 </tbody>
                                 <tfoot>
                                 <tr>
                                     <th>No.</th>
                                     <th>Author</th>
-                                    <th>Hobby Icon</th>
-                                    <th>Hobby Text</th>
                                     <th>Hobby Status</th>
-                                    <th>Fact Icon</th>
-                                    <th>Fact Heading</th>
+                                    <th>Hobby Icon</th>
                                     <th>Fact Status</th>
+                                    <th>Fact Icon</th>
                                     <th>Created At</th>
                                     <th>Updated At</th>
                                     <th>Action</th>
