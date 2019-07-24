@@ -1,6 +1,6 @@
 @extends('layouts.backend.master')
 
-@section('title', 'Users Information')
+@section('title', 'Hobby & Fact')
 
 @push('css')
 
@@ -70,22 +70,16 @@
                                             <td class="text-center" style="padding-left: 5px;">
                                                 <ul class="tbl-action-btn">
                                                     <li>
-                                                        <a href="{{ route('admin.hobbies-facts.show', $hobbyFact->id) }}" class="btn btn-primary btn-xs text-center">
-                                                            <span class="lnr lnr-eye tb-btn"></span>
-
-                                                        </a>
-                                                    </li>
-                                                    <li>
                                                         <a href="{{ route('admin.hobbies-facts.edit', $hobbyFact->id) }}" class="btn btn-info btn-xs text-center"><span class="lnr lnr-sync left tb-btn"></span></a>
                                                     </li>
 
                                                         <li>
-                                                            <button class="btn btn-danger btn-xs" onclick="deleteUser({{ $hobbyFact->id }})"><span class="lnr lnr-trash left tb-btn"></span></button>
+                                                            <button class="btn btn-danger btn-xs" onclick="deleteHobbyFact({{ $hobbyFact->id }})"><span class="lnr lnr-trash left tb-btn"></span></button>
 
-                                                            {{--<form id="delete-form-{{ $user->id }}" action="{{ route('admin.users.destroy', $user->id)}}" method="POST" style="display: none;">--}}
-                                                                {{--@csrf--}}
-                                                                {{--@method('DELETE')--}}
-                                                            {{--</form>--}}
+                                                            <form id="delete-form-{{ $hobbyFact->id }}" action="{{ route('admin.hobbies-facts.destroy', $hobbyFact->id)}}" method="POST" style="display: none;">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                            </form>
                                                         </li>
 
                                                 </ul>
@@ -126,7 +120,7 @@
 
         $("#admin-delete").tooltip({ 'trigger' : 'hover', 'title' : 'can not delete admin!!'  });
 
-        function deleteUser(id){
+        function deleteHobbyFact(id){
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
