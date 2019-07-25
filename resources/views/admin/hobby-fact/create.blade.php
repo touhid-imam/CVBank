@@ -36,7 +36,7 @@
             </div>
             <div class="panel panel-headline">
                 <div class="panel-heading">
-                    <h2 class="panel-title"></h2>
+                    <h2 class="panel-title">Add New Hobby Fact</h2>
                 </div>
 
                 <div class="panel-body">
@@ -98,17 +98,7 @@
 
     <script>
 
-//        const hobby_btn = $('#hobby_status');
-//        const hobby_wrap = $('.hobby-wrapper');
-//        $(hobby_btn).on('click', function(){
-//
-//            if(($(this).attr('checked', 'checked')) === true){
-//                hobby_wrap.css({'display' : 'none'});
-//            }
-//
-//
-//
-//        });
+
 
         $(document).ready(function(){
             const hobby_status = $('#hobby_status');
