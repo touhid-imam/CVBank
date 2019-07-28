@@ -1,12 +1,12 @@
 @extends('layouts.backend.master')
 
-@section('title', 'Resume')
+@section('title', 'Create Resume')
 
 
 @push('css')
 
     <style>
-        .checkbox {
+        .radio {
             position: relative;
             left: 26px;
         }
@@ -29,7 +29,7 @@
                 <div class="col-md-6">
                     <div class="panel-body">
                         <h1 style="text-align: right">
-                            <a href="{{ route('admin.resume.index') }}" class="btn btn-success btn-md"><span class="lnr lnr-arrow-left"></span>Back</a>
+                            <a href="{{ route('admin.resumes.index') }}" class="btn btn-success btn-md"><span class="lnr lnr-arrow-left"></span>Back</a>
                         </h1>
                     </div>
                 </div>
@@ -42,22 +42,23 @@
         </div>
         <div class="panel panel-headline">
             <div class="panel-body">
-                <form method="POST" action="{{ route('admin.resume.store') }}">
+                <form method="POST" action="{{ route('admin.resumes.store') }}">
                     @csrf
+
                     <div style="margin-bottom: 30px;" class="row">
                        <div class="col-md-4">
-                            <div class="checkbox">
-                                <input type="checkbox" name="education" id="education"> Education
+                            <div class="radio">
+                                <input type="radio" name="option" id="education" value="1"> Education
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="checkbox">
-                                <input type="checkbox" name="academic-professional" id="academic-professional"> Academic & Professional
+                            <div class="radio">
+                                <input type="radio" name="option" id="academic-professional" value="2"> Academic & Professional
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="checkbox">
-                                <input type="checkbox" name="honors-awards" id="honors-awards"> Honours & Awards
+                            <div class="radio">
+                                <input type="radio" name="option" id="honors-awards" value="3"> Honours & Awards
                             </div>
                         </div>
                     </div>
@@ -66,19 +67,19 @@
                     </div>
 
                     <div class="form-group">
-                        <input type="text" class="form-control" name="university-organization" placeholder="University or Awards Name...">
+                        <input type="text" class="form-control" name="university_org" placeholder="University or Awards Name...">
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" name="location" placeholder="Location...">
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="starting-date" placeholder="Started...">
+                        <input type="date" class="form-control" name="start" placeholder="Started...">
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="ending-date" placeholder="Ended...">
+                        <input type="date" class="form-control" name="end" placeholder="Ended...">
                     </div>
                     <div class="form-group">
-                        <textarea name="description" id="" cols="30" rows="10" class="form-control" placeholder="Details"></textarea>
+                        <textarea name="desc" id="" cols="30" rows="10" class="form-control" placeholder="Details"></textarea>
                     </div>
                     <input type="submit" value="SUBMIT" class="btn btn-primary">
                 </form>
@@ -91,6 +92,7 @@
 @stop
 
 @push('js')
+
 
 
 @endpush

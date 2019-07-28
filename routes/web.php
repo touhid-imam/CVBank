@@ -11,6 +11,10 @@
 |
 */
 
+
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -25,7 +29,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
     route::patch('profile-update', 'UserProfile@profileUpdate')->name('profile.update');
     route::patch('password-update', 'UserProfile@passwordUpdate')->name('password-update');
     route::resource('hobbies-facts', 'HobbyFactController');
-    route::resource('resume', 'ResumesController');
+    route::resource('resumes', 'ResumesController');
 
 });
 

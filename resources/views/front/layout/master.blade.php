@@ -2,7 +2,7 @@
 
         @yield('about')
 
-        @yield('resume')
+        @yield('resumes')
 
         @yield('publication')
 

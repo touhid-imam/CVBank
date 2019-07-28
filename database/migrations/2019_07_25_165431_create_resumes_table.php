@@ -13,9 +13,20 @@ class CreateResumesTable extends Migration
      */
     public function up()
     {
-        Schema::create('resume', function (Blueprint $table) {
+        Schema::create('resumes', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->unsigned();
+            $table->integer ('option');
+            $table->string ('title');
+            $table->string ('university_org');
+            $table->string ('location');
+            $table->date ('start');
+            $table->date ('end');
+            $table->text ('desc');
             $table->timestamps();
+            $table->foreign ('user_id')
+                    ->references('id')->on('users')
+                    ->onDelete('cascade');
         });
     }
 
@@ -26,6 +37,6 @@ class CreateResumesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('resume');
+        Schema::dropIfExists('resumes');
     }
 }

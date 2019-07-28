@@ -8,7 +8,7 @@
 
 
 
-@section('resume')
+@section('resumes')
 
     @include('front.template-parts.resume')
 

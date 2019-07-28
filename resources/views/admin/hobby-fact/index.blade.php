@@ -36,7 +36,7 @@
             </div>
             <div class="panel">
                 <div class="panel-body">
-                    {{--@if($users)--}}
+                    @if($hobbyFacts)
                         <div class="wrapper">
                             <table id="myTable" class="table table-striped table-bordered" style="width:100%">
                                 <thead>
@@ -102,7 +102,7 @@
                                 </tfoot>
                             </table>
                         </div>
-                    {{--@endif--}}
+                    @endif
                 </div>
             </div>
         </div>

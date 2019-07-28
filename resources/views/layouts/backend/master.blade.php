@@ -9,6 +9,7 @@
     <!-- VENDOR CSS -->
     <link rel="stylesheet" href="{{asset ('public/backend/assets/vendor/bootstrap/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset ('public/backend/assets/vendor/font-awesome/css/font-awesome.min.css')}}">
+
     <link rel="stylesheet" href="{{asset ('public/backend/assets/vendor/linearicons/style.css')}}">
     <link rel="stylesheet" href="{{asset ('public/backend/assets/vendor/chartist/css/chartist-custom.css')}}">
     <!-- MAIN CSS -->
@@ -87,6 +88,7 @@
 <!-- END WRAPPER -->
 <!-- Javascript -->
 <script src="{{ asset('public/backend/assets/vendor/jquery/jquery.min.js') }}"></script>
+
 <script src="{{ asset('public/backend/assets/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('public/backend/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
 

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Resume;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ResumesController extends Controller
 {
@@ -14,7 +17,8 @@ class ResumesController extends Controller
      */
     public function index()
     {
-        //
+        $resumes = Resume::latest()->get();
+        return view('admin.resumes.index', compact('resumes'));
     }
 
     /**
@@ -24,8 +28,7 @@ class ResumesController extends Controller
      */
     public function create()
     {
-
-        return view('admin.resume.create');
+        return view('admin.resumes.create');
     }
 
     /**
@@ -36,7 +39,32 @@ class ResumesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+//        $this->validate ($request, [
+//            'option'                    => 'required',
+//            'title'                     => 'required',
+//            'university_organization'   => 'required',
+//            'location'                  => 'required',
+//            'starting'             => 'required',
+//            'ending'               => 'required',
+//            'description'               => 'required',
+//        ]);
+
+        $starting_date  = date('Y-m-d', strtotime ($request->starting));
+        $ending_date    = date('Y-m-d', strtotime ($request->ending));
+
+        $resume                    = new Resume();
+        $resume->user_id           = Auth::id();
+        $resume->option            = $request->option;
+        $resume->title             = $request->title;
+        $resume->university_org    = $request->university_org;
+        $resume->location          = $request->location;
+        $resume->start             = $starting_date;
+        $resume->end               = $ending_date;
+        $resume->desc              = $request->desc;
+        $resume->save();
+
+        Toastr::success('Resume Successfully Created', 'Success');
+        return redirect ()->route ('admin.resumes.index');
     }
 
     /**
