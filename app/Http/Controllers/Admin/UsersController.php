@@ -149,8 +149,9 @@ class UsersController extends Controller
     }
 
 
-    public function destroy(User $user){
+    public function destroy($id){
 
+        $user = User::findOrFail($id);
         if(Storage::disk ('public')->exists ('profile/' . $user->image))
         {
             Storage::disk('public')->delete('profile/'. $user->image);

@@ -39,18 +39,18 @@ class ResumesController extends Controller
      */
     public function store(Request $request)
     {
-//        $this->validate ($request, [
-//            'option'                    => 'required',
-//            'title'                     => 'required',
-//            'university_organization'   => 'required',
-//            'location'                  => 'required',
-//            'starting'             => 'required',
-//            'ending'               => 'required',
-//            'description'               => 'required',
-//        ]);
+        $this->validate ($request, [
+            'option'            => 'required',
+            'title'             => 'required',
+            'university_org'    => 'required',
+            'location'          => 'required',
+            'start'             => 'required',
+            'end'               => 'required',
+            'desc'              => 'required',
+        ]);
 
-        $starting_date  = date('Y-m-d', strtotime ($request->starting));
-        $ending_date    = date('Y-m-d', strtotime ($request->ending));
+        $starting_date  = date('Y-m-d', strtotime ($request->start));
+        $ending_date    = date('Y-m-d', strtotime ($request->end));
 
         $resume                    = new Resume();
         $resume->user_id           = Auth::id();
@@ -63,7 +63,7 @@ class ResumesController extends Controller
         $resume->desc              = $request->desc;
         $resume->save();
 
-        Toastr::success('Resume Successfully Created', 'Success');
+        Toastr::success('Resume item Successfully Created', 'Success');
         return redirect ()->route ('admin.resumes.index');
     }
 
@@ -86,7 +86,9 @@ class ResumesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $resume = Resume::findOrFail($id);
+
+        return view('admin.resumes.edit', compact('resume'));
     }
 
     /**
@@ -98,7 +100,32 @@ class ResumesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate ($request, [
+            'option'            => 'required',
+            'title'             => 'required',
+            'university_org'    => 'required',
+            'location'          => 'required',
+            'start'             => 'required',
+            'end'               => 'required',
+            'desc'              => 'required',
+        ]);
+
+        $starting_date  = date('Y-m-d', strtotime ($request->start));
+        $ending_date    = date('Y-m-d', strtotime ($request->end));
+
+        $resume = Resume::findOrFail($id);
+        $resume->user_id           = Auth::id();
+        $resume->option            = $request->option;
+        $resume->title             = $request->title;
+        $resume->university_org    = $request->university_org;
+        $resume->location          = $request->location;
+        $resume->start             = $starting_date;
+        $resume->end               = $ending_date;
+        $resume->desc              = $request->desc;
+        $resume->save();
+
+        Toastr::success('Resume item Successfully Updated', 'Success');
+        return redirect ()->route ('admin.resumes.index');
     }
 
     /**
@@ -109,6 +136,10 @@ class ResumesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $resume = Resume::findOrFail($id);
+        $resume->delete();
+
+        Toastr::success('Resume item Successfully Deleted', 'Success');
+        return redirect ()->back();
     }
 }

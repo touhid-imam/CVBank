@@ -26,6 +26,26 @@
                         </div>
                     </li>
 
+                    <li>
+                        <a {{ Request::is('admin/resumes*') ? 'class=active' : 'class=collapsed'}} href="#resume-fact" data-toggle="collapse"><i class="lnr lnr-layers"></i> <span>Resume Management</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+                        <div id="resume-fact" {{ Request::is('admin/resumes*') ? 'class="collapse in"' : 'class=collapse'}}>
+                            <ul class="nav">
+                                <li><a {{ Request::is('admin/resumes') ? 'class=active' : ' '}} href="{{ route('admin.resumes.index') }}">All Resume</a></li>
+                                <li><a {{ Request::is('admin/resumes/create') ? 'class=active' : ' '}} href="{{ route ('admin.resumes.create') }}">Create Resume</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li>
+                        <a {{ Request::is('admin/team*') ? 'class=active' : 'class=collapsed'}} href="#team-fact" data-toggle="collapse"><i class="lnr lnr-layers"></i> <span>Team Management</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+                        <div id="team-fact" {{ Request::is('admin/team*') ? 'class="collapse in"' : 'class=collapse'}}>
+                            <ul class="nav">
+                                <li><a {{ Request::is('admin/team') ? 'class=active' : ' '}} href="{{ route('admin.team.index') }}">Team Members</a></li>
+                                <li><a {{ Request::is('admin/team/create') ? 'class=active' : ' '}} href="{{ route ('admin.team.create') }}">Create Team</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
 
                     <li><a href="elements.html" class=""><i class="lnr lnr-code"></i> <span>Elements</span></a></li>
 

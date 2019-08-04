@@ -30,6 +30,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
     route::patch('password-update', 'UserProfile@passwordUpdate')->name('password-update');
     route::resource('hobbies-facts', 'HobbyFactController');
     route::resource('resumes', 'ResumesController');
+    route::resource ('team', 'TeamController');
 
 });
 

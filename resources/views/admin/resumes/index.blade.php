@@ -37,6 +37,7 @@
                 </div>
             </div>
 
+
             <div class="panel">
                 <div class="panel-body">
                     @if($resumes)
@@ -61,11 +62,11 @@
                                     <td>{{ $resume->user->name }}</td>
                                     <td>
                                         @if($resume->option == 1)
-                                            {{ "EDUCATION" }}
+                                            {{ "Education" }}
                                         @elseif($resume->option == 2)
-                                            {{ "ACADEMIC AND PROFESSIONAL" }}
+                                            {{ "Academic & Professional" }}
                                         @else
-                                            {{ "HONORS AND AWARDS" }}
+                                            {{ "Honors & Awards" }}
                                         @endif
                                     </td>
                                     <td>{{ $resume->title }}</td>
@@ -110,7 +111,7 @@
                     </div>
                     @endif
                 </div>
-            </div>
+            </div> <!-- panel -->
         </div>
     </div>
 
