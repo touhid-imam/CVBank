@@ -95,7 +95,7 @@
                                 <tr>
                                     <th>No.</th>
                                     <th>Author</th>
-                                    <th>Memeber Photo</th>
+                                    <th>Member Photo</th>
                                     <th>Member Name</th>
                                     <th>Member Position</th>
                                     <th>Created At</th>

@@ -37,7 +37,7 @@
                     </li>
 
                     <li>
-                        <a {{ Request::is('admin/team*') ? 'class=active' : 'class=collapsed'}} href="#team-fact" data-toggle="collapse"><i class="lnr lnr-layers"></i> <span>Team Management</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+                        <a {{ Request::is('admin/team*') ? 'class=active' : 'class=collapsed'}} href="#team-fact" data-toggle="collapse"><i class="lnr lnr-users"></i> <span>Team Management</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                         <div id="team-fact" {{ Request::is('admin/team*') ? 'class="collapse in"' : 'class=collapse'}}>
                             <ul class="nav">
                                 <li><a {{ Request::is('admin/team') ? 'class=active' : ' '}} href="{{ route('admin.team.index') }}">Team Members</a></li>
