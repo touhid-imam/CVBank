@@ -32,6 +32,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
     route::resource('resumes', 'ResumesController');
     route::resource ('team', 'TeamController');
     route::resource('tag', 'TagController');
+    route::resource('category', 'CategoryController');
 
 });
 

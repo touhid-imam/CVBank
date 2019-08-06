@@ -1,7 +1,7 @@
 @extends('layouts.backend.master')
 
 
-@section('title', 'Tags')
+@section('title', 'Categories')
 
 
 @push('css')
@@ -24,7 +24,7 @@
         <div class="col-md-12">
             <div class="panel panel-heading">
                 <div class="panel-body">
-                    <h1>Tags Management</h1>
+                    <h1>Categories Management</h1>
                 </div>
             </div>
         </div>
@@ -32,38 +32,38 @@
 
             <div class="panel">
                 <div class="panel-body">
-                    @if($tags)
+                    @if($categories)
                         <div class="wrapper">
                             <table id="myTable" class="table table-striped table-bordered" style="width:100%">
                                 <thead>
                                 <tr>
                                     <th>No.</th>
-                                    <th>Tag Name</th>
+                                    <th>Category Name</th>
                                     <th>Created At</th>
                                     <th>Updated At</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($tags as $key => $tag)
+                                @foreach($categories as $key => $category)
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
-                                        <td>{{ $tag->name }}</td>
+                                        <td>{{ $category->name }}</td>
 
-                                        <td>{{ $tag->created_at ? $tag->created_at->diffForHumans() : ' ' }}</td>
-                                        <td>{{ $tag->updated_at ? $tag->updated_at->diffForHumans() : ' ' }}</td>
+                                        <td>{{ $category->created_at ? $category->created_at->diffForHumans() : ' ' }}</td>
+                                        <td>{{ $category->updated_at ? $category->updated_at->diffForHumans() : ' ' }}</td>
                                         <td class="text-center" style="padding-left: 5px;">
                                             <ul class="tbl-action-btn">
                                                 <li>
-                                                    <button class="btn btn-info btn-xs text-center" data-toggle="modal" data-target="#myModal-{{ $tag->id }}">
+                                                    <button class="btn btn-info btn-xs text-center" data-toggle="modal" data-target="#myModal-{{ $category->id }}">
                                                         <span class="lnr lnr-sync left tb-btn"></span>
                                                     </button>
-                                                       </li>
+                                                </li>
 
                                                 <li>
-                                                    <button class="btn btn-danger btn-xs" onclick="deleteTag({{ $tag->id }})"><span class="lnr lnr-trash left tb-btn"></span></button>
+                                                    <button class="btn btn-danger btn-xs" onclick="deleteCategory({{ $category->id }})"><span class="lnr lnr-trash left tb-btn"></span></button>
 
-                                                    <form id="delete-form-{{ $tag->id }}" action="{{ route('admin.tag.destroy', $tag->id)}}" method="POST" style="display: none;">
+                                                    <form id="delete-form-{{ $category->id }}" action="{{ route('admin.category.destroy', $category->id)}}" method="POST" style="display: none;">
                                                         @csrf
                                                         @method('DELETE')
                                                     </form>
@@ -73,20 +73,20 @@
                                         </td>
                                     </tr>
 
-                                    <div class="modal fade" id="myModal-{{ $tag->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                    <div class="modal fade" id="myModal-{{ $category->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                    <h4 class="modal-title" id="myModalLabel">Update Tag</h4>
+                                                    <h4 class="modal-title" id="myModalLabel">Update Category</h4>
                                                 </div>
                                                 <div class="modal-body">
 
-                                                    <form method="POST" action="{{ route('admin.tag.update', $tag->id) }}">
+                                                    <form method="POST" action="{{ route('admin.category.update', $category->id) }}">
                                                         @csrf
                                                         @method('PATCH')
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" name="name" placeholder="Update Tag Name..." value="{{ $tag->name }}">
+                                                            <input type="text" class="form-control" name="name" placeholder="Update Category Name..." value="{{ $category->name }}">
                                                         </div>
                                                         <input type="submit" value="Update" class="btn btn-success">
                                                     </form>
@@ -102,7 +102,7 @@
                                 <tfoot>
                                 <tr>
                                     <th>No.</th>
-                                    <th>Tag Name</th>
+                                    <th>Category Name</th>
                                     <th>Created At</th>
                                     <th>Updated At</th>
                                     <th>Action</th>
@@ -116,12 +116,12 @@
         </div> <!-- col-md-6 -->
         <div class="col-md-5">
             <div class="panel panel-heading">
-                <h3 style="margin-left: 25px;">Create Tag</h3>
+                <h3 style="margin-left: 25px;">Create Category</h3>
                 <div class="panel-body">
-                    <form method="POST" action="{{ route ('admin.tag.store') }}">
+                    <form method="POST" action="{{ route ('admin.category.store') }}">
                         @csrf
                         <div class="form-group">
-                            <input type="text" name="name" class="form-control" placeholder="Enter Tag Name...">
+                            <input type="text" name="name" class="form-control" placeholder="Enter Category Name...">
                         </div>
                         <input type="submit" value="Create" class="btn btn-primary">
 
@@ -147,7 +147,7 @@
             $('#myTable').DataTable();
         } );
 
-        function deleteTag(id){
+        function deleteCategory(id){
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
