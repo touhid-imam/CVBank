@@ -61,14 +61,14 @@ class PostController extends Controller
         if (isset($image)) {
             // make unique image
             $currentDate = Carbon::now ()->toDateString ();
-            $imageName = $slug . '-' . $currentDate . '-' . uniqid () . '-' . $image->getClientOriginalExtension ();
+            $imageName = $slug . '-' . $currentDate . '-' . uniqid () . '.'.$image->getClientOriginalExtension ();
 
             if (!Storage::disk ('public')->exists ('post')) {
                 Storage::disk ('public')->makeDirectory ('post');
             }
 
-            $postImage = Image::make ($image)->resize (480, 200);
-            Storage::disk ('public')->put ('post/' . $imageName, $postImage);
+            $postImage = Image::make ($image)->resize (480, 200)->save();
+            Storage::disk ('public')->put ('post/' .$imageName, $postImage);
 
         } else {
 
@@ -94,7 +94,7 @@ class PostController extends Controller
         $post->tags ()->attach ($request->tags);
 
 
-        Toastr::success('Post Successfully Saved!!');
+        Toastr::success('Post Successfully Saved!!', 'Success');
         return redirect ()->route('admin.post.index');
     }
 
@@ -117,7 +117,10 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        $categories = Category::latest()->get();
+        $tags       = Tag::latest()->get();
+
+        return view('admin.post.edit', compact ('post', 'categories', 'tags'));
     }
 
     /**
@@ -129,7 +132,53 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $this->validate ($request, [
+            'title' => 'required',
+            'categories' => 'required',
+            'tags' => 'required',
+            'decs' => 'required',
+         ]);
+
+        $image = $request->file ('image');
+        $slug = str_slug ($request->title);
+
+        if (isset($image)) {
+            // make unique image
+            $currentDate = Carbon::now ()->toDateString ();
+            $imageName = $slug . '-' . $currentDate . '-' . uniqid () . '.'.$image->getClientOriginalExtension ();
+
+            if (!Storage::disk ('public')->exists ('post')) {
+                Storage::disk ('public')->makeDirectory ('post');
+            }
+
+            $postImage = Image::make ($image)->resize (480, 200)->save();
+            Storage::disk ('public')->put ('post/' .$imageName, $postImage);
+
+        } else {
+
+            $imageName = $post->image;
+
+        }
+
+        $post->user_id = Auth::id ();
+        $post->title = $request->title;
+        $post->slug = $slug;
+        $post->image = $imageName;
+        $post->decs = $request->decs;
+        if (isset($request->status)) {
+            $post->status = true;
+        } else {
+            $post->status = false;
+        }
+        $post->is_approved = true;
+        $post->save ();
+
+        $post->categories ()->attach ($request->categories);
+        $post->tags ()->attach ($request->tags);
+
+
+        Toastr::success('Post Successfully Updated!!', 'Success');
+        return redirect ()->route('admin.post.index');
     }
 
     /**

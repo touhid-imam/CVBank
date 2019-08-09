@@ -73,7 +73,7 @@
                                         <td class="text-center" style="padding-left: 5px;">
                                             <ul class="tbl-action-btn">
                                                 <li>
-                                                    <a class="btn btn-info btn-xs text-center">
+                                                    <a href="{{ route ('admin.post.edit', $post->id) }}" class="btn btn-info btn-xs text-center">
                                                         <span class="lnr lnr-sync left tb-btn"></span>
                                                     </a>
                                                 </li>
