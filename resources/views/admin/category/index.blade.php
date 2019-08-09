@@ -24,11 +24,11 @@
         <div class="col-md-12">
             <div class="panel panel-heading">
                 <div class="panel-body">
-                    <h1>Categories Management</h1>
+                    <h1>Categories Management  <span style="font-size: 22px" class="badge"> {{ $categories->count() }}</span></h1>
                 </div>
             </div>
         </div>
-        <div class="col-md-7">
+        <div class="col-md-8">
 
             <div class="panel">
                 <div class="panel-body">
@@ -39,6 +39,7 @@
                                 <tr>
                                     <th>No.</th>
                                     <th>Category Name</th>
+                                    <th>Post Count</th>
                                     <th>Created At</th>
                                     <th>Updated At</th>
                                     <th>Action</th>
@@ -49,6 +50,7 @@
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
                                         <td>{{ $category->name }}</td>
+                                        <td>{{ $category->posts->count() }}</td>
 
                                         <td>{{ $category->created_at ? $category->created_at->diffForHumans() : ' ' }}</td>
                                         <td>{{ $category->updated_at ? $category->updated_at->diffForHumans() : ' ' }}</td>
@@ -103,6 +105,7 @@
                                 <tr>
                                     <th>No.</th>
                                     <th>Category Name</th>
+                                    <th>Post Count</th>
                                     <th>Created At</th>
                                     <th>Updated At</th>
                                     <th>Action</th>
@@ -114,7 +117,7 @@
                 </div>
             </div> <!-- panel -->
         </div> <!-- col-md-6 -->
-        <div class="col-md-5">
+        <div class="col-md-4">
             <div class="panel panel-heading">
                 <h3 style="margin-left: 25px;">Create Category</h3>
                 <div class="panel-body">

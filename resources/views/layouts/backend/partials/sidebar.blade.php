@@ -46,6 +46,18 @@
                         </div>
                     </li>
 
+                    <li>
+                        <a {{ Request::is('admin/post*') || Request::is('admin/category*') || Request::is('admin/tag*') ? 'class=active' : 'class=collapsed'}} href="#posts" data-toggle="collapse"><i class="lnr lnr-users"></i> <span>Posts</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+                        <div id="posts" {{ Request::is('admin/post*') || Request::is('admin/category*') || Request::is('admin/tag*') ? 'class="collapse in"' : 'class=collapse'}}>
+                            <ul class="nav">
+                                <li><a {{ Request::is('admin/post') ? 'class=active' : ' '}} href="{{ route('admin.post.index') }}">All Posts</a></li>
+                                <li><a {{ Request::is('admin/post/create') ? 'class=active' : ' '}} href="{{ route ('admin.post.create') }}">Create Post</a></li>
+                                <li><a {{ Request::is('admin/category') ? 'class=active' : ' '}} href="{{ route ('admin.category.index') }}">Categories</a></li>
+                                <li><a {{ Request::is('admin/tag') ? 'class=active' : ' '}} href="{{ route ('admin.tag.index') }}">Tags</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
 
                     <li><a href="elements.html" class=""><i class="lnr lnr-code"></i> <span>Elements</span></a></li>
 

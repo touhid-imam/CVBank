@@ -2,8 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Category;
+use App\Post;
+use App\Tag;
+use Brian2694\Toastr\Facades\Toastr;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class PostController extends Controller
 {
@@ -14,7 +22,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Post::latest()->get();
+
+        return view('admin.post.index', compact ('posts'));
     }
 
     /**
@@ -24,7 +34,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::latest()->get();
+        $tags       = Tag::latest()->get();
+        return view('admin.post.create', compact ('categories', 'tags'));
     }
 
     /**
@@ -35,16 +47,64 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate ($request, [
+            'title' => 'required',
+            'categories' => 'required',
+            'tags' => 'required',
+            'decs' => 'required',
+            'image' => 'required'
+        ]);
+
+        $image = $request->file ('image');
+        $slug = str_slug ($request->title);
+
+        if (isset($image)) {
+            // make unique image
+            $currentDate = Carbon::now ()->toDateString ();
+            $imageName = $slug . '-' . $currentDate . '-' . uniqid () . '-' . $image->getClientOriginalExtension ();
+
+            if (!Storage::disk ('public')->exists ('post')) {
+                Storage::disk ('public')->makeDirectory ('post');
+            }
+
+            $postImage = Image::make ($image)->resize (480, 200);
+            Storage::disk ('public')->put ('post/' . $imageName, $postImage);
+
+        } else {
+
+            $imageName = 'https://via.placeholder.com/480/200';
+
+        }
+
+        $post = new Post();
+        $post->user_id = Auth::id ();
+        $post->title = $request->title;
+        $post->slug = $slug;
+        $post->image = $imageName;
+        $post->decs = $request->decs;
+        if (isset($request->status)) {
+            $post->status = true;
+        } else {
+            $post->status = false;
+        }
+        $post->is_approved = true;
+        $post->save ();
+
+        $post->categories ()->attach ($request->categories);
+        $post->tags ()->attach ($request->tags);
+
+
+        Toastr::success('Post Successfully Saved!!');
+        return redirect ()->route('admin.post.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post $post)
     {
         //
     }
@@ -52,10 +112,10 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
         //
     }
@@ -64,10 +124,10 @@ class PostController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
         //
     }
@@ -75,11 +135,23 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        //
+        if (Storage::disk('public')->exists ('post/' . $post->image))
+        {
+            Storage::disk ('public')->delete ('post/' . $post->image);
+        }
+
+        $post->categories ()->detach();
+        $post->tags ()->detach();
+
+        $post->delete();
+
+        Toastr::success('Post Successfully Deleted!!', 'Success');
+
+        return redirect ()->back();
     }
 }
