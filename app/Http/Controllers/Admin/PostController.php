@@ -151,6 +151,11 @@ class PostController extends Controller
                 Storage::disk ('public')->makeDirectory ('post');
             }
 
+            if (Storage::disk('public')->exists ('post/' . $post->image))
+            {
+                Storage::disk ('public')->delete ('post/' . $post->image);
+            }
+
             $postImage = Image::make ($image)->resize (480, 200)->save();
             Storage::disk ('public')->put ('post/' .$imageName, $postImage);
 
@@ -159,6 +164,7 @@ class PostController extends Controller
             $imageName = $post->image;
 
         }
+
 
         $post->user_id = Auth::id ();
         $post->title = $request->title;
@@ -173,8 +179,8 @@ class PostController extends Controller
         $post->is_approved = true;
         $post->save ();
 
-        $post->categories ()->attach ($request->categories);
-        $post->tags ()->attach ($request->tags);
+        $post->categories ()->sync ($request->categories);
+        $post->tags ()->sync ($request->tags);
 
 
         Toastr::success('Post Successfully Updated!!', 'Success');

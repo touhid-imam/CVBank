@@ -33,7 +33,7 @@
 
 @section('teaching')
 
-    @include('front.template-parts.teaching')
+    @include('front.template-parts.services')
 
 @stop
 

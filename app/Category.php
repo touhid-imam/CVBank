@@ -12,4 +12,8 @@ class Category extends Model
         return $this->belongsToMany ('App\Post')->withTimestamps ();
     }
 
+    public function works()
+    {
+        return $this->belongsToMany ('App\Work')->withTimestamps ();
+    }
 }
