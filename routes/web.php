@@ -35,6 +35,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
     route::resource('category', 'CategoryController');
     route::resource('post', 'PostController');
     route::resource('work', 'WorkController');
+    route::resource('skill', 'SkillController');
 
     Route::get('/laravel-filemanager', '\UniSharp\LaravelFilemanager\Controllers\LfmController@show');
     Route::post('/laravel-filemanager/upload', '\UniSharp\LaravelFilemanager\Controllers\UploadController@upload');

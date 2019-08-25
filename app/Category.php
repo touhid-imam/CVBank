@@ -16,4 +16,9 @@ class Category extends Model
     {
         return $this->belongsToMany ('App\Work')->withTimestamps ();
     }
+
+    public function skills()
+    {
+        return $this->belongsToMany ('App\Skill')->withTimestamps ();
+    }
 }
