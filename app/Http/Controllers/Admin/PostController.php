@@ -49,7 +49,7 @@ class PostController extends Controller
     {
         $this->validate ($request, [
             'title' => 'required',
-            'categories' => 'required',
+            'category' => 'required',
             'tags' => 'required',
             'decs' => 'required',
             'image' => 'required'
@@ -90,7 +90,7 @@ class PostController extends Controller
         $post->is_approved = true;
         $post->save ();
 
-        $post->categories ()->attach ($request->categories);
+        $post->categories ()->attach ($request->category);
         $post->tags ()->attach ($request->tags);
 
 
@@ -134,7 +134,7 @@ class PostController extends Controller
     {
         $this->validate ($request, [
             'title' => 'required',
-            'categories' => 'required',
+            'category' => 'required',
             'tags' => 'required',
             'decs' => 'required',
          ]);
@@ -179,7 +179,7 @@ class PostController extends Controller
         $post->is_approved = true;
         $post->save ();
 
-        $post->categories ()->sync ($request->categories);
+        $post->categories ()->sync ($request->category);
         $post->tags ()->sync ($request->tags);
 
 

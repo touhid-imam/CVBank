@@ -17,12 +17,14 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->integer ('role_id')->nullable();
             $table->string('name');
+            $table->string ('slug')->unique ();
             $table->string('username')->unique();
             $table->string('email')->unique();
             $table->string('education')->nullable ();
             $table->string('location')->nullable ();
             $table->string('phone')->nullable ();
             $table->boolean('availability')->default (false);
+            $table->boolean('status')->default (false);
             $table->mediumText('short_desc')->nullable ();
             $table->string('image')->default('default.png');
             $table->timestamp('email_verified_at')->nullable();

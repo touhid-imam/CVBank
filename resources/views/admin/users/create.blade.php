@@ -44,21 +44,24 @@
                             <input type="text" name="username" class="form-control" placeholder="Username...">
                         </div>
                         <div class="form-group">
-                            <select class="form-control" name="role_id" id="role_id">
-                            @if($users_role)
-                                @foreach($users_role as $user_role)
-                                    <option value="{{$user_role}}">
-                                        @if($user_role == 1)
-                                            {{ 'Admin' }}
-                                        @elseif($user_role == 2)
-                                            {{ 'Hiring Manager' }}
-                                        @else
-                                            {{ 'Job Seeker' }}
-                                        @endif
-                                    </option>
-                                @endforeach
-                            @endif;
-                            </select>
+                            <div class="input-group">
+                                <span class="input-group-addon">User Role:</span>
+                                <select class="form-control" name="role_id" id="role_id">
+                                @if($users_role)
+                                    @foreach($users_role as $user_role)
+                                        <option value="{{$user_role}}">
+                                            @if($user_role == 1)
+                                                {{ 'Admin' }}
+                                            @elseif($user_role == 2)
+                                                {{ 'Hiring Manager' }}
+                                            @else
+                                                {{ 'Job Seeker' }}
+                                            @endif
+                                        </option>
+                                    @endforeach
+                                @endif;
+                                </select>
+                            </div>
                         </div>
                         <div class="form-group">
                             <input type="email" name="email" class="form-control" placeholder="Email">
@@ -73,11 +76,15 @@
                             <input type="tel" name="phone" class="form-control" placeholder="Phone Number...">
                         </div>
                         <div class="form-group">
-                            <select class="form-control" name="availability" id="availability">
-                                <option value="1">Available</option>
-                                <option value="0">Not Available</option>
-                            </select>
+                            <div class="input-group">
+                                <span class="input-group-addon">Available For Work:</span>
+                                <select class="form-control" name="availability" id="availability">
+                                    <option value="1">Available</option>
+                                    <option value="0">Not Available</option>
+                                </select>
+                            </div>
                         </div>
+
                         <div class="form-group">
                             <textarea class="form-control" name="short_desc" id="" cols="30" rows="10" placeholder="Write an Short Desc."></textarea>
                         </div>

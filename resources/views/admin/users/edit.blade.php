@@ -45,23 +45,26 @@
                             <input type="text" name="name" class="form-control" placeholder="Name..." value="{{$user->name}}">
                         </div>
                         <div class="form-group">
-                            <input type="text" name="username" class="form-control" placeholder="Username..." disabled>
+                            <input type="text" name="username" class="form-control" placeholder="Username..." id="username" disabled>
                         </div>
                         <div class="form-group">
-                            <select class="form-control" name="role_id" id="role_id">
-                            @if(isset($users_role))
-                                @foreach($users_role as $user_role)
-                                    <option value="{{$user_role}}" {{ $user_role == $user->role_id ? 'selected' : ' ' }}>
-                                        @if($user_role == 1)
-                                            {{ 'Admin' }}
-                                        @elseif($user_role == 2)
-                                            {{ 'Hiring Manager' }}
-                                        @else
-                                            {{ 'Job Seeker' }}
-                                        @endif</option>
-                                @endforeach
-                            @endif
-                            </select>
+                            <div class="input-group">
+                                <span class="input-group-addon">User Role:</span>
+                                <select class="form-control" name="role_id" id="role_id">
+                                @if(isset($users_role))
+                                    @foreach($users_role as $user_role)
+                                        <option value="{{$user_role}}" {{ $user_role == $user->role_id ? 'selected' : ' ' }}>
+                                            @if($user_role == 1)
+                                                {{ 'Admin' }}
+                                            @elseif($user_role == 2)
+                                                {{ 'Hiring Manager' }}
+                                            @else
+                                                {{ 'Job Seeker' }}
+                                            @endif</option>
+                                    @endforeach
+                                @endif
+                                </select>
+                            </div>
                         </div>
                         <div class="form-group">
                             <input type="email" name="email" class="form-control" placeholder="Email" value="{{ $user->email }}">
@@ -76,10 +79,13 @@
                             <input type="tel" name="phone" class="form-control" placeholder="Phone Number..." value="{{ $user->phone }}">
                         </div>
                         <div class="form-group">
-                            <select class="form-control" name="availability" id="availability">
-                                <option {{ $user->availability == 1 ? 'selected' : ''  }} value="1">Available</option>
-                                <option {{ $user->availability == 0 ? 'selected' : ''  }} value="0">Not Available</option>
-                            </select>
+                            <div class="input-group">
+                                <span class="input-group-addon">Available for Work:</span>
+                                <select class="form-control" name="availability" id="availability">
+                                    <option {{ $user->availability == 1 ? 'selected' : ''  }} value="1">Available</option>
+                                    <option {{ $user->availability == 0 ? 'selected' : ''  }} value="0">Not Available</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="form-group">
                             <textarea class="form-control" name="short_desc" id="" cols="30" rows="10" placeholder="Write an Short Desc.">{{ $user->short_desc }}</textarea>
@@ -115,5 +121,8 @@
 
 @push('js')
 
+    <script>
+        $("#username").tooltip({ 'trigger' : 'hover', 'title' : 'Don\'t have permission to change this'  });
+    </script>
 
 @endpush

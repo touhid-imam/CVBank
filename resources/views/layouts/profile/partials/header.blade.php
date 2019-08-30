@@ -47,7 +47,7 @@
 <!-- container -->
 <div id="hs-container" class="hs-container">
 
-@include('front.includes.sidebar')
+@include('layouts.profile.partials.sidebar')
 
     <!-- Go To Top Button -->
     <a href="#hs-menu" class="hs-totop-link"><i class="fa fa-chevron-up"></i></a>
@@ -68,23 +68,10 @@
                 <div class="news-scroll">
                     <span><i class="fa fa-line-chart"></i>RECENT ACTIVITY : </span>
                     <ul id="marquee" class="marquee">
-                        <li>
-                            Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Fusce tincidunt adipiscing,massa. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Fusce tincidunt adipiscing,massa.</li>
-                        <li>
-                            Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Fusce tincidunt adipiscing,massa. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Fusce tincidunt adipiscing,massa.
-                        </li>
-                        <li>
-                            Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Fusce tincidunt adipiscing,massa. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Fusce tincidunt adipiscing,massa.
-                        </li>
-                        <li>
-                            Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Fusce tincidunt adipiscing,massa. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Fusce tincidunt adipiscing,massa.
-                        </li>
-                        <li>
-                            Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Fusce tincidunt adipiscing,massa. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Fusce tincidunt adipiscing,massa.
-                        </li>
-                        <li>
-                            Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Fusce tincidunt adipiscing,massa. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Fusce tincidunt adipiscing,massa.
-                        </li>
+                        {{--<li>--}}
+                            {{--Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Fusce tincidunt adipiscing,massa. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Fusce tincidunt adipiscing,massa.</li>--}}            @foreach($user->posts as $post)
+                            <li><strong>{{ $post->title }} :</strong> {{ str_limit(str_replace('&nbsp;', ' ', strip_tags($post->decs)), 200) }}</li>
+                        @endforeach
                     </ul>
                 </div>
                 <!-- End News scroll -->

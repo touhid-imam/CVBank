@@ -66,6 +66,16 @@
                             </ul>
                         </div>
                     </li>
+                    <li>
+                        <a {{ Request::is('admin/skill*') ? 'class=active' : 'class=collapsed'}} href="#skill" data-toggle="collapse"><i class="lnr lnr-graduation-hat"></i> <span>Skill</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+                        <div id="skill" {{ Request::is('admin/skill*') ? 'class="collapse in"' : 'class=collapse'}}>
+                            <ul class="nav">
+                                <li><a {{ Request::is('admin/skill') ? 'class=active' : ' '}} href="{{ route('admin.skill.index') }}">Skill List</a></li>
+                                <li><a {{ Request::is('admin/skill/create') ? 'class=active' : ' '}} href="{{ route ('admin.skill.create') }}">Create Skill</a></li>
+
+                            </ul>
+                        </div>
+                    </li>
                     <br/>
                     <hr/>
 
@@ -106,6 +116,67 @@
                @if(Request::is('jobseeker*'))
 
                    <li><a href="{{ route('jobseeker.dashboard') }}" class="active"><i class="lnr lnr-home"></i> <span>{{ __('Dashboard') }}</span></a></li>
+
+                       <li>
+                           <a {{ Request::is('jobseeker/hobbies-facts*') ? 'class=active' : 'class=collapsed'}} href="#hobby-fact" data-toggle="collapse"><i class="lnr lnr-thumbs-up"></i> <span>Facts Management</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+                           <div id="hobby-fact" {{ Request::is('jobseeker/hobbies-facts*') ? 'class="collapse in"' : 'class=collapse'}}>
+                               <ul class="nav">
+                                   <li><a {{ Request::is('jobseeker/hobbies-facts') ? 'class=active' : ' '}} href="{{ route('jobseeker.hobbies-facts.index') }}">All Hobby & Fact</a></li>
+                                   <li><a {{ Request::is('jobseeker/hobbies-facts/create') ? 'class=active' : ' '}} href="{{ route ('jobseeker.hobbies-facts.create') }}">Create Hobby & Fact</a></li>
+                               </ul>
+                           </div>
+                       </li>
+
+                       <li>
+                           <a {{ Request::is('jobseeker/resumes*') ? 'class=active' : 'class=collapsed'}} href="#resume-fact" data-toggle="collapse"><i class="lnr lnr-layers"></i> <span>Resume Management</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+                           <div id="resume-fact" {{ Request::is('jobseeker/resumes*') ? 'class="collapse in"' : 'class=collapse'}}>
+                               <ul class="nav">
+                                   <li><a {{ Request::is('jobseeker/resumes') ? 'class=active' : ' '}} href="{{ route('jobseeker.resumes.index') }}">All Resume</a></li>
+                                   <li><a {{ Request::is('jobseeker/resumes/create') ? 'class=active' : ' '}} href="{{ route ('jobseeker.resumes.create') }}">Create Resume</a></li>
+                               </ul>
+                           </div>
+                       </li>
+
+                       <li>
+                           <a {{ Request::is('jobseeker/team*') ? 'class=active' : 'class=collapsed'}} href="#team-fact" data-toggle="collapse"><i class="lnr lnr-users"></i> <span>Team Management</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+                           <div id="team-fact" {{ Request::is('jobseeker/team*') ? 'class="collapse in"' : 'class=collapse'}}>
+                               <ul class="nav">
+                                   <li><a {{ Request::is('jobseeker/team') ? 'class=active' : ' '}} href="{{ route('jobseeker.team.index') }}">Team Members</a></li>
+                                   <li><a {{ Request::is('jobseeker/team/create') ? 'class=active' : ' '}} href="{{ route ('jobseeker.team.create') }}">Create Team</a></li>
+                               </ul>
+                           </div>
+                       </li>
+
+                       <li>
+                           <a {{ Request::is('jobseeker/post*') ? 'class=active' : 'class=collapsed'}} href="#posts" data-toggle="collapse"><i class="lnr lnr-users"></i> <span>Posts</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+                           <div id="posts" {{ Request::is('jobseeker/post*') ? 'class="collapse in"' : 'class=collapse'}}>
+                               <ul class="nav">
+                                   <li><a {{ Request::is('jobseeker/post') ? 'class=active' : ' '}} href="{{ route('jobseeker.post.index') }}">All Posts</a></li>
+                                   <li><a {{ Request::is('jobseeker/post/create') ? 'class=active' : ' '}} href="{{ route ('jobseeker.post.create') }}">Create Post</a></li>
+
+                               </ul>
+                           </div>
+                       </li>
+                       <li>
+                           <a {{ Request::is('jobseeker/work*') ? 'class=active' : 'class=collapsed'}} href="#works" data-toggle="collapse"><i class="lnr lnr-briefcase"></i> <span>Works</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+                           <div id="works" {{ Request::is('jobseeker/work*') ? 'class="collapse in"' : 'class=collapse'}}>
+                               <ul class="nav">
+                                   <li><a {{ Request::is('jobseeker/work') ? 'class=active' : ' '}} href="{{ route('jobseeker.work.index') }}">Work List</a></li>
+                                   <li><a {{ Request::is('jobseeker/work/create') ? 'class=active' : ' '}} href="{{ route ('jobseeker.work.create') }}">Create Work</a></li>
+
+                               </ul>
+                           </div>
+                       </li>
+                       <li>
+                           <a {{ Request::is('jobseeker/skill*') ? 'class=active' : 'class=collapsed'}} href="#skill" data-toggle="collapse"><i class="lnr lnr-graduation-hat"></i> <span>Skill</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+                           <div id="skill" {{ Request::is('jobseeker/skill*') ? 'class="collapse in"' : 'class=collapse'}}>
+                               <ul class="nav">
+                                   <li><a {{ Request::is('jobseeker/skill') ? 'class=active' : ' '}} href="{{ route('jobseeker.skill.index') }}">Skill List</a></li>
+                                   <li><a {{ Request::is('jobseeker/skill/create') ? 'class=active' : ' '}} href="{{ route ('jobseeker.skill.create') }}">Create Skill</a></li>
+
+                               </ul>
+                           </div>
+                       </li>
 
                @endif
             </ul>

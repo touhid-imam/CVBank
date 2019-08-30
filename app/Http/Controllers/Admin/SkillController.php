@@ -48,7 +48,7 @@ class SkillController extends Controller
             'experience'        => 'required',
             'skill_level'      => 'required',
             'short_decs'        => 'required',
-            'categories'        => 'required',
+            'category'        => 'required',
             'tags'              => 'required',
 
         ]);
@@ -72,7 +72,7 @@ class SkillController extends Controller
         $skill->short_decs = $request->short_decs;
         $skill->save();
 
-        $skill->categories ()->attach($request->categories);
+        $skill->categories ()->attach($request->category);
         $skill->tags ()->attach($request->tags);
 
         Toastr::success('Skill Successfully Saved!!', 'Success');
@@ -117,7 +117,7 @@ class SkillController extends Controller
             'experience'        => 'required',
             'skill_level'      => 'required',
             'short_decs'        => 'required',
-            'categories'        => 'required',
+            'category'        => 'required',
             'tags'              => 'required',
 
         ]);
@@ -140,7 +140,7 @@ class SkillController extends Controller
         $skill->short_decs = $request->short_decs;
         $skill->save();
 
-        $skill->categories ()->sync($request->categories);
+        $skill->categories ()->sync($request->category);
         $skill->tags ()->sync($request->tags);
 
         Toastr::success('Skill Successfully Updated!!', 'Success');

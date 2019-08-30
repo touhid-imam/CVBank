@@ -842,7 +842,7 @@ a:active {
 }
 
 .hs-content-wrapper {
-    width: 4010px;
+    width: 3515px;
     position: absolute;
     overflow: hidden;
     height: 100%;
@@ -2864,7 +2864,6 @@ ul.marquee li {
     font-weight: 400;
     border-radius: 0;
     font-size: 10px;
-    background: rgba(0, 0, 0, 0.13);
     color: rgba(255, 255, 255, 0.77);
     ;
     padding: 2px 5px;
@@ -4547,5 +4546,15 @@ screen and (max-height: 300px) {
 
 .service-section .grey-out {
     opacity: .2;
+}
+
+
+/** Custom CSS **/
+
+.front{
+    z-index: 0;
+}
+.back{
+    z-index: 1;
 }
 

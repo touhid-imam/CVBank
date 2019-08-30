@@ -15,11 +15,17 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Route::get('/user/{slug}', 'ProfileController@userProfile')->name('profile');
+
+Auth::routes(['verify' => true]);
+
+Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth', 'admin']], function(){
 
@@ -55,14 +61,16 @@ Route::group(['as' => 'jobseeker.', 'prefix' => 'jobseeker', 'namespace' => 'Job
 
 
     route::get('dashboard', 'DashboardController@index')->name('dashboard');
+    route::get('profile', 'UserProfile@index')->name('profile');
+    route::patch('profile-update', 'UserProfile@profileUpdate')->name('profile.update');
+    route::patch('password-update', 'UserProfile@passwordUpdate')->name('password-update');
+    route::resource('hobbies-facts', 'HobbyFactController');
+    route::resource('resumes', 'ResumesController');
+    route::resource ('team', 'TeamController');
+    route::resource('post', 'PostController');
+    route::resource('work', 'WorkController');
+    route::resource('skill', 'SkillController');
 
 
 });
 
-
-Route::get('/front', function () {
-    return view('front.index');
-});
-
-
-Route::get('/home', 'HomeController@index')->name('home');

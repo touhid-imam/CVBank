@@ -103,13 +103,13 @@
 
                 </div>
                 <div class="form-group">
-                    <label for="username" class="control-label sr-only">{{ __('USER NAME') }}</label>
+                    <label for="username" class="control-label sr-only">{{ __('USERNAME') }}</label>
 
-                    <input id="signin-name" type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" placeholder="Username..." required autofocus>
+                    <input id="signin-username" type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" placeholder="Username..." required autofocus>
 
-                    @if ($errors->has('name'))
+                    @if ($errors->has('username'))
                         <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('name') }}</strong>
+                                        <strong>{{ $errors->first('username') }}</strong>
                                     </span>
                     @endif
 
@@ -128,19 +128,18 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="role_id" class="control-label radio-inline sr-only">{{ __('Job Seeker') }}</label>
+                    <label for="role_id" class="control-label sr-only">{{ __('ROLES') }}</label>
 
-                    <select class="form-control" name="role_id" id="role_id">
-                        <option value="2">Hiring Manager</option>
-                        <option value="3">Job Seeker</option>
+                    <select class="form-control{{ $errors->has('role_id') ? ' is-invalid' : '' }}" name="role_id" id="role_id">
+                        <option value="2">{{ "Hiring Manager" }}</option>
+                        <option value="3">{{ "Job Seeker" }}</option>
                     </select>
 
                     @if ($errors->has('role_id'))
                         <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('role_id') }}</strong>
-                                    </span>
+                                    <strong>{{ $errors->first('role_id') }}</strong>
+                                </span>
                     @endif
-
                 </div>
 
 

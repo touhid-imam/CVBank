@@ -47,7 +47,7 @@ class WorkController extends Controller
     {
         $this->validate ($request, [
             'title'         => 'required',
-            'categories'    => 'required',
+            'category'    => 'required',
             'desc'          => 'required',
             'image'         => 'required'
         ]);
@@ -86,7 +86,7 @@ class WorkController extends Controller
         }
         $work->save ();
 
-        $work->categories ()->attach ($request->categories);
+        $work->categories ()->attach ($request->category);
 
 
         Toastr::success('Work Successfully Saved!!', 'Success');
@@ -129,7 +129,7 @@ class WorkController extends Controller
     {
         $this->validate ($request, [
             'title'         => 'required',
-            'categories'    => 'required',
+            'category'    => 'required',
             'desc'          => 'required'
         ]);
 
@@ -171,7 +171,7 @@ class WorkController extends Controller
         }
         $work->save ();
 
-        $work->categories ()->sync ($request->categories);
+        $work->categories ()->sync ($request->category);
 
 
         Toastr::success('Work Successfully Updated!!', 'Update');

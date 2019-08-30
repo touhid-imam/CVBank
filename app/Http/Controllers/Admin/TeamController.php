@@ -86,16 +86,6 @@ class TeamController extends Controller
         return redirect()->route('admin.team.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -119,7 +109,46 @@ class TeamController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate ($request, [
+            'name'          => 'required',
+            'position'      => 'required',
+            'desc'          => 'required'
+        ]);
+
+        $team = Team::findOrFail($id);
+        $image = $request->file('image');
+        $slug = str_slug ($request->name);
+
+        if(isset($image)){
+            // make unique name for image
+            $currentDate = Carbon::now ()->toDateString ();
+            $imageName   = $slug . '-' . $currentDate . '-' . uniqid () . '.' . $image->getClientOriginalExtension ();
+
+            if(!Storage::disk ('public')->exists ('team')){
+                Storage::disk('public')->makeDirectory ('team');
+            }
+
+            $teamImage = Image::make($image)->resize (220, 300)->save();
+            Storage::disk('public')->put ('team/'. $imageName, $teamImage);
+        } else{
+            $imageName = $team->image;
+        }
+
+        $team->user_id          = Auth::id ();
+        $team->name             = $request->name;
+        $team->position         = $request->position;
+        $team->facebook         = $request->facebook;
+        $team->linkedin         = $request->linkedin;
+        $team->stackoverflow    = $request->stactoverflow;
+        $team->dribble          = $request->dribble;
+        $team->github           = $request->github;
+        $team->desc             = $request->desc;
+        $team->image            = $imageName;
+        $team->save();
+
+
+        Toastr::success('User Successfully Created', 'Success');
+        return redirect()->route('admin.team.index');
     }
 
     /**
