@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@8.13.6/dist/sweetalert2.min.css">
 
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/venobox/1.8.6/venobox.min.css" type="text/css" media="screen" />
+
     <style>
         .profile-header .online-status.status-unavailable::before{
             background-color: darkred;
@@ -33,13 +35,13 @@
                     <div class="profile-stat">
                         <div class="row">
                             <div class="col-md-4 stat-item">
-                                45 <span>Projects</span>
+                                {{ count($user->posts) }} <span>Blog</span>
                             </div>
                             <div class="col-md-4 stat-item">
-                                15 <span>Awards</span>
+                                {{ $awards }} <span>Awards</span>
                             </div>
                             <div class="col-md-4 stat-item">
-                                2174 <span>Points</span>
+                                {{ count($user->works) }} <span>Projects</span>
                             </div>
                         </div>
                     </div>
@@ -69,51 +71,35 @@
                         <h4 class="heading">About</h4>
                         <p>{{ $user->short_desc ? $user->short_desc : 'Not Updated' }}</p>
                     </div>
-                    <div class="text-center"><a href="#" target="_blank" class="btn btn-primary">Preview Profile</a></div>
+                    <div class="text-center"><a href="{{ route('profile', $user->username) }}" target="_blank" class="btn btn-primary">Preview Profile</a></div>
                 </div>
                 <!-- END PROFILE DETAIL -->
             </div>
             <!-- END LEFT COLUMN -->
             <!-- RIGHT COLUMN -->
             <div class="profile-right">
-                <h4 class="heading">Samuel's Awards</h4>
+                @if($awards)
+                    <h4 class="heading">{{ $user->name }}'s Awards</h4>
+                @endif
                 <!-- AWARDS -->
                 <div class="awards">
                     <div class="row">
-                        <div class="col-md-3 col-sm-6">
-                            <div class="award-item">
-                                <div class="hexagon">
-                                    <span class="lnr lnr-sun award-icon"></span>
+                        @foreach($user->resumes as $award)
+                            @if($award->option == 3)
+                            <div class="col-md-3 col-sm-6">
+                                <div class="award-item">
+                                    <div class="hexagon">
+                                        <span class="lnr lnr-sun award-icon"></span>
+                                    </div>
+                                    <span>{{ $award->title }}</span>
                                 </div>
-                                <span>Most Bright Idea</span>
                             </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="award-item">
-                                <div class="hexagon">
-                                    <span class="lnr lnr-clock award-icon"></span>
-                                </div>
-                                <span>Most On-Time</span>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="award-item">
-                                <div class="hexagon">
-                                    <span class="lnr lnr-magic-wand award-icon"></span>
-                                </div>
-                                <span>Problem Solver</span>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="award-item">
-                                <div class="hexagon">
-                                    <span class="lnr lnr-heart award-icon"></span>
-                                </div>
-                                <span>Most Loved</span>
-                            </div>
-                        </div>
+                            @endif
+                        @endforeach
                     </div>
-                    <div class="text-center"><a href="#" class="btn btn-default">See all awards</a></div>
+                    @if($user->video)
+                        <div class="text-center"><a class="venobox btn btn-default" data-vbtype="video" href="https://www.youtube.com/watch?v={{ $user->video }}">Profile Video</a></div>
+                    @endif
                 </div>
                 <!-- END AWARDS -->
                 <!-- TABBED CONTENT -->
@@ -148,6 +134,15 @@
                             </div>
                             <div class="form-group">
                                 <input type="tel" name="phone" class="form-control" placeholder="Phone Number..." value="{{ $user->phone }}">
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="lnr lnr-film-play"></i>
+                                </span>
+                                    <input type="text" name="video" class="form-control" placeholder="Please Enter Youtube Video ID..." value="{{ $user->video }}">
+                                </div>
+                                <p>How to get video id? <a target="_blank" href="https://gist.github.com/jakebellacera/d81bbf12b99448188f183141e6696817">check here...</a></p>
                             </div>
                             <div class="form-group">
                                 <select class="form-control" name="availability" id="availability">
@@ -198,8 +193,18 @@
 
 @push('js')
 
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/venobox/1.8.6/venobox.min.js"></script>
+
     <script>
         $("#username").tooltip({ 'trigger' : 'hover', 'title' : 'You can\'t change username'  });
+
+        $(document).ready(function(){
+            $('.venobox').venobox({
+                spinner: 'cube-grid'
+            });
+        });
+
     </script>
 
 @endpush

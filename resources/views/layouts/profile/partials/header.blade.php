@@ -69,7 +69,7 @@
                     <span><i class="fa fa-line-chart"></i>RECENT ACTIVITY : </span>
                     <ul id="marquee" class="marquee">
                         {{--<li>--}}
-                            {{--Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Fusce tincidunt adipiscing,massa. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Fusce tincidunt adipiscing,massa.</li>--}}            @foreach($user->posts as $post)
+    {{--Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Fusce tincidunt adipiscing,massa. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Fusce tincidunt adipiscing,massa.</li>--}}            @foreach($user->posts as $post)
                             <li><strong>{{ $post->title }} :</strong> {{ str_limit(str_replace('&nbsp;', ' ', strip_tags($post->decs)), 200) }}</li>
                         @endforeach
                     </ul>

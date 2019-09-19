@@ -45,6 +45,15 @@
                         </div>
                         <div class="form-group">
                             <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="lnr lnr-film-play"></i>
+                                </span>
+                                <input type="text" name="video" class="form-control" placeholder="Please Enter Youtube Video ID...">
+                            </div>
+                            <p>How to get video id? <a target="_blank" href="https://gist.github.com/jakebellacera/d81bbf12b99448188f183141e6696817">check here...</a></p>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
                                 <span class="input-group-addon">User Role:</span>
                                 <select class="form-control" name="role_id" id="role_id">
                                 @if($users_role)

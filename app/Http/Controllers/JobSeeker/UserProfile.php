@@ -4,6 +4,7 @@ namespace App\Http\Controllers\JobSeeker;
 
 use App\User;
 use Brian2694\Toastr\Facades\Toastr;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -19,8 +20,9 @@ class UserProfile extends Controller
 
         $currentUser = Auth::user()->id;
         $user = User::findOrFail($currentUser);
+        $awards = $user->resumes()->where('option', 3)->count();
 
-        return view('jobseeker.profile.user', compact('user'));
+        return view('jobseeker.profile.user', compact('user','awards'));
     }
 
 
@@ -46,6 +48,30 @@ class UserProfile extends Controller
             $currentDate    = Carbon::now()->toDateString();
             $imageName      = $slug . '-' . $currentDate . '-' . uniqid () . '.' . $image->getClientOriginalExtension ();
 
+
+            // homepage users image
+
+
+            if(!Storage::disk('public')->exists('profile/front')){
+
+                Storage::disk('public')->makeDirectory ('profile/front');
+
+            }
+
+            // Delete old user image
+
+            if(Storage::disk('public')->exists ('profile/front/'. $user->image)){
+                Storage::disk('public')->delete('profile/front/'. $user->image);
+            }
+
+            // resize image for home block and upload
+
+            $front = Image::make($image)->resize(348, 280)->save();
+            Storage::disk('public')->put('profile/front/'.$imageName,$front);
+
+
+            // Dashboard Profile Image
+
             if(!Storage::disk('public')->exists ('profile')){
                 Storage::disk('public')->makeDirectory ('profile');
             }
@@ -59,6 +85,8 @@ class UserProfile extends Controller
 
             $profileImage = Image::make($image)->resize(90, 90)->save();
             Storage::disk('public')->put('profile/'.$imageName, $profileImage);
+
+
         } else{
             $imageName = $user->image;
         }
@@ -69,6 +97,7 @@ class UserProfile extends Controller
         $user->education    = $request->education;
         $user->location     = $request->location;
         $user->phone        = $request->phone;
+        $user->video        = $request->video;
         $user->availability = $request->availability;
         $user->short_desc   = $request->short_desc;
         $user->image        = $imageName;

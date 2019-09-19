@@ -10,7 +10,6 @@
 <!-- PLUGIN SCRIPTS -->
 
 <script src="{{ asset ('public/front/js/libs.js') }}"></script>
-<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?sensor=false"></script>
 
 <!-- END PLUGIN SCRIPTS -->
 </body>

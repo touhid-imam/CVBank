@@ -37,7 +37,7 @@ class UsersController extends Controller
             'email'         => 'required',
             'location'      => 'required',
             'phone'         => 'required',
-            'image'         => 'required',
+            'image'         => 'required|mimes:jpeg,bmp,png,jpg',
             'password'      => ['required', 'string', 'min:8', 'confirmed']
         ]);
 
@@ -55,6 +55,21 @@ class UsersController extends Controller
 
             $profileImage = Image::make($image)->resize(150, 150)->save();
             Storage::disk('public')->put('profile/'. $imageName, $profileImage);
+
+
+            // homepage users image
+
+            if(!Storage::disk('public')->exists('profile/front')){
+
+                Storage::disk('public')->makeDirectory ('profile/front');
+
+            }
+
+            // resize image for category slider and upload
+
+            $front = Image::make($image)->resize(348, 320)->save();
+            Storage::disk('public')->put('profile/front/'.$imageName,$front);
+
         } else{
             $imageName = 'default.png';
         }
@@ -62,12 +77,14 @@ class UsersController extends Controller
 
         $user = new User();
         $user->name         = $request->name;
+        $user->slug         = $slug;
         $user->username     = $request->username;
         $user->role_id      = $request->role_id;
         $user->email        = $request->email;
         $user->education    = $request->education;
         $user->location     = $request->location;
         $user->phone        = $request->phone;
+        $user->video        = $request->video;
         $user->availability = $request->availability;
         $user->short_desc   = $request->short_desc;
         $user->image        = $imageName;
@@ -112,15 +129,35 @@ class UsersController extends Controller
                 Storage::disk ('public')->makeDirectory ('profile');
             }
 
+
             // Delete old post image
 
             if(Storage::disk('public')->exists ('profile/'. $user->image)){
                 Storage::disk('public')->delete('profile/'. $user->image);
             }
 
-
             $profileImage = Image::make($image)->resize(150, 150)->save();
             Storage::disk('public')->put('profile/'. $imageName, $profileImage);
+
+
+            // homepage users image
+
+            if(!Storage::disk('public')->exists('profile/front')){
+
+                Storage::disk('public')->makeDirectory ('profile/front');
+
+            }
+
+            // Delete old user image
+
+            if(Storage::disk('public')->exists ('profile/front/'. $user->image)){
+                Storage::disk('public')->delete('profile/front/'. $user->image);
+            }
+
+            // resize image for home block and upload
+
+            $front = Image::make($image)->resize(348, 320)->save();
+            Storage::disk('public')->put('profile/front/'.$imageName,$front);
         } else{
             $imageName = $user->image;
         }
@@ -131,6 +168,7 @@ class UsersController extends Controller
         $user->education    = $request->education;
         $user->location     = $request->location;
         $user->phone        = $request->phone;
+        $user->video        = $request->video;
         $user->availability = $request->availability;
         $user->short_desc   = $request->short_desc;
         $user->image        = $imageName;
@@ -155,6 +193,11 @@ class UsersController extends Controller
         if(Storage::disk ('public')->exists ('profile/' . $user->image))
         {
             Storage::disk('public')->delete('profile/'. $user->image);
+        }
+
+        if(Storage::disk ('public')->exists ('profile/front/' . $user->image))
+        {
+            Storage::disk('public')->delete('profile/front/'. $user->image);
         }
 
         $user->delete();

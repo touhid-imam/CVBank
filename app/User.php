@@ -67,4 +67,16 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany ('App\Skill');
     }
 
+    public function message()
+    {
+        return $this->hasMany ('App\UserMessage');
+    }
+
+    // Local Scope
+
+    public function scopeAvailability($query){
+        return $query->where('availability', 1);
+    }
+
+
 }

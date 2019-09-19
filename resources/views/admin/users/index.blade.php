@@ -22,7 +22,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="panel-body">
-                            <h1>All Users Information</h1>
+                            <h1>All Users Information - <span style="font-size: 22px" class="badge">{{ $users->count() }}</span></h1>
                         </div>
                     </div>
                     <div class="col-md-6">

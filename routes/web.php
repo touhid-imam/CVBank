@@ -12,20 +12,30 @@
 */
 
 
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+
+Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/user/{slug}', 'ProfileController@userProfile')->name('profile');
+//Route::get('/user/{slug}/profile-pdf', 'ProfileController@pdfView');
+//Route::get('/user/{slug}/pdf', 'ProfileController@download');
+
+Route::post('/sendmail/send', 'ProfileController@send')->name('sendEmail');
+Route::get('/search', 'SearchController@userSearch')->name('userSearch');
+
+Route::get('/user/{username}/profile-pdf', 'ProfileController@pdfMaker')->name('pdfDownload');
 
 Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth', 'admin']], function(){
 
@@ -42,6 +52,9 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
     route::resource('post', 'PostController');
     route::resource('work', 'WorkController');
     route::resource('skill', 'SkillController');
+    route::get('messages', 'MessagesController@index')->name('messages');
+    route::get('message/{id}', 'MessagesController@show')->name('messageShow');
+    route::delete('messages/{message}', 'MessagesController@destroy')->name('messageDelete');
 
     Route::get('/laravel-filemanager', '\UniSharp\LaravelFilemanager\Controllers\LfmController@show');
     Route::post('/laravel-filemanager/upload', '\UniSharp\LaravelFilemanager\Controllers\UploadController@upload');
@@ -70,7 +83,13 @@ Route::group(['as' => 'jobseeker.', 'prefix' => 'jobseeker', 'namespace' => 'Job
     route::resource('post', 'PostController');
     route::resource('work', 'WorkController');
     route::resource('skill', 'SkillController');
+    route::get('messages', 'MessagesController@index')->name('messages');
+    route::get('messages/{message}', 'MessagesController@show')->name('messageShow');
+    route::delete('messages/{message}', 'MessagesController@destroy')->name('messageDelete');
 
 
 });
+
+
+
 

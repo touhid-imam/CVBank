@@ -4,7 +4,7 @@
 
 @push('css')
 
-
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/venobox/1.8.6/venobox.min.css" type="text/css" media="screen" />
 
 @endpush
 
@@ -45,7 +45,16 @@
                             <input type="text" name="name" class="form-control" placeholder="Name..." value="{{$user->name}}">
                         </div>
                         <div class="form-group">
-                            <input type="text" name="username" class="form-control" placeholder="Username..." id="username" disabled>
+                            <input type="text" name="username" class="form-control" placeholder="Username..." id="username" value="{{ $user->username }}" disabled>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="lnr lnr-film-play"></i>
+                                </span>
+                                <input type="text" name="video" class="form-control" placeholder="Please Enter Youtube Video ID..." value="{{ $user->video }}">
+                            </div>
+                            <p>How to get video id? <a target="_blank" href="https://gist.github.com/jakebellacera/d81bbf12b99448188f183141e6696817">check here...</a></p>
                         </div>
                         <div class="form-group">
                             <div class="input-group">
@@ -113,6 +122,9 @@
                         @else
                         <img src="https://via.placeholder.com/150" alt="Placeholder" class="img-responsive img-thumbnail">
                     @endif
+                    @if($user->video)
+                <a style="margin-top: 20px;" class="venobox text-center btn btn-success" data-vbtype="video" href="https://www.youtube.com/watch?v={{ $user->video }}">Watch Video</a>
+                    @endif
                 </div>
             </div>
         </div>
@@ -121,8 +133,17 @@
 
 @push('js')
 
+    <script src="//cdnjs.cloudflare.com/ajax/libs/venobox/1.8.6/venobox.min.js"></script>
+
     <script>
+
         $("#username").tooltip({ 'trigger' : 'hover', 'title' : 'Don\'t have permission to change this'  });
+
+        $(document).ready(function(){
+            $('.venobox').venobox({
+                spinner: 'cube-grid'
+            });
+        });
     </script>
 
 @endpush

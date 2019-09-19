@@ -20,16 +20,16 @@
                     <div class="face2 card-face">
                         <div id="cd-google-map">
                             <div class="video-wrapper">
-                                <iframe width="445" height="225" src="https://www.youtube.com/embed/jisykyGMsLg" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe width="445" height="225" src="https://www.youtube.com/embed/{{ $user->video }}" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
-                            <address>8690 Paul Street, San fransico</address>
+                            <address>{{ $user->name }} - {{ $user->location }}</address>
                             <div class="back-cover" data-card-back="data-card-back"><i class="fa fa-long-arrow-left"></i>
                             </div>
                         </div>
                     </div>
                     <div class="face1 card-face">
                         <div class="about-cover card-face">
-                            <a class="map-location" data-card-front="data-card-front"><img src="{{ asset('public/front') }}/icons/icon-play.png" alt="">
+                            <a class="map-location" data-card-front="cd-google-map"><img src="{{ asset('public/front') }}/icons/icon-play.png" alt="">
                             </a>
                             <div class="about-details">
                                 <div><span class="fa fa-inbox"></span><span class="detail">{{ $user->email }}</span>
@@ -347,11 +347,11 @@
         <div class="hs-inner">
             {{--<span class="before-title">.04</span>--}}
             <h2>RESEARCH</h2>
-            <span class="content-title">LABORATORY TEAM</span>
+            <span class="content-title">YOUR TEAM</span>
             <div class="team_wrapper">
                 @if($teamMembers)
                     @foreach($teamMembers as $teamMember)
-                        <div class="team-card-container">
+                    <div class="team-card-container">
                     <div class="card">
                         <div style="background: linear-gradient(rgba(43, 48, 59, 0.8), rgba(43, 48, 59, 0.8)), url({{ Storage::disk('public')->url("team/" . $teamMember->image) }}); background: -webkit-linear-gradient(rgba(43, 48, 59, 0.8), rgba(43, 48, 59, 0.8)), url({{ Storage::disk('public')->url("team/" . $teamMember->image) }})" class="front team1">
                             <div class="front-detail">
@@ -492,11 +492,33 @@
             </div>
             <!-- Contact Form -->
             <fieldset id="contact_form">
-                <div id="result"></div>
-                <input type="text" name="name" id="name" placeholder="NAME" />
-                <input type="email" name="email" id="email" placeholder="EMAIL" />
-                <textarea name="message" id="message" placeholder="MESSAGE"></textarea>
-                <span class="submit_btn" id="submit_btn">SEND MESSAGE</span>
+                @if(count($errors) > 0)
+                    <div class="alert alert-danger alert-dismissible text-left">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <ul>
+                            @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                @if($message = Session::get('emailSend'))
+                        <div class="alert alert-success alert-dismissible text-left">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <strong>{{ $message }}</strong>
+                        </div>
+                @endif
+                <form method="POST" action="{{ route('sendEmail') }}">
+                    @csrf
+                    <input type="text" name="name" id="name" placeholder="NAME" required />
+                    <input type="email" name="email" id="email" placeholder="EMAIL" required/>
+                    <textarea name="message" id="message" placeholder="MESSAGE"></textarea>
+                    <input type="hidden" name="userId" value="{{ $user->id }}">
+
+                    <input type="submit" value="SEND MESSAGE" class="submit_btn" id="submit_btn">
+
+                </form>
             </fieldset>
             <!-- End Contact Form -->
         </div>

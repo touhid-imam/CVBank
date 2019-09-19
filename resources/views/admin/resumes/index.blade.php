@@ -24,7 +24,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="panel-body">
-                            <h1>All Resumes</h1>
+                            <h1>All Resumes - <span style="font-size: 22px" class="badge">{{ $resumes->count() }}</h1>
                         </div>
                     </div>
                     <div class="col-md-6">
