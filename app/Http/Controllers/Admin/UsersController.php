@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Personal;
 use App\Role;
 use App\User;
 
@@ -77,7 +78,6 @@ class UsersController extends Controller
 
         $user = new User();
         $user->name         = $request->name;
-        $user->slug         = $slug;
         $user->username     = $request->username;
         $user->role_id      = $request->role_id;
         $user->email        = $request->email;
@@ -91,6 +91,9 @@ class UsersController extends Controller
         $user->password     = Hash::make($request->password);
         $user->save ();
 
+        Personal::create([
+            'user_id'  => $user->id
+        ]);
         Toastr::success('User Successfully Created', 'Success');
         return redirect ()->route ('admin.users.index');
     }

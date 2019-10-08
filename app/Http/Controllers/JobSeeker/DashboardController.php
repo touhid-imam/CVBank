@@ -14,6 +14,12 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['auth', 'verified']);
+    }
+
     public function index(){
         $userPosts = Post::where('user_id', Auth::id())->get()->count();
         $userHobbyFact = HobbyFacts::where('user_id', Auth::id())->get()->count();

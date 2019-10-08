@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\JobSeeker;
 
+use App\Personal;
 use App\User;
 use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
@@ -21,8 +22,10 @@ class UserProfile extends Controller
         $currentUser = Auth::user()->id;
         $user = User::findOrFail($currentUser);
         $awards = $user->resumes()->where('option', 3)->count();
+        $personal = Personal::where('user_id', $currentUser)->firstOrFail();
 
-        return view('jobseeker.profile.user', compact('user','awards'));
+
+        return view('jobseeker.profile.user', compact('user','awards', 'personal'));
     }
 
 
@@ -141,6 +144,46 @@ class UserProfile extends Controller
         }
 
     }
+
+    public function personalUpdate(Request $request)
+    {
+        $this->validate ($request, [
+            'father_name' => 'required',
+            'mother_name' => 'required',
+            'date_of_birth' => 'required',
+            'nationality' => 'required',
+            'merital_status' => 'required',
+            'sex' => 'required',
+            'language' => 'required',
+            'phone_num' => 'required',
+            'email' => 'required',
+            'present_address' => 'required',
+            'permanent_address' => 'required',
+        ]);
+
+
+        $personal = Personal::findOrFail($request->id);
+        $personal->father_name          = $request->father_name;
+        $personal->mother_name          = $request->mother_name;
+        $personal->date_of_birth        = $request->date_of_birth;
+        $personal->nationality          = $request->nationality;
+        $personal->merital_status       = $request->merital_status;
+        $personal->sex                  = $request->sex;
+        $personal->language             = $request->language;
+        $personal->phone_num            = $request->phone_num;
+        $personal->email                = $request->email;
+        $personal->present_address      = $request->present_address;
+        $personal->permanent_address    = $request->permanent_address;
+        $personal->save();
+
+        Toastr::success('Your Personal information Updated', 'Success');
+
+        return redirect ()->back();
+
+    }
+
+
+
 
 
 }

@@ -16,7 +16,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'slug', 'username', 'role_id', 'email', 'education', 'location', 'phone', 'availability', 'short_desc', 'image', 'password',
+        'name', 'slug', 'username', 'role_id', 'email', 'education', 'location', 'phone', 'availability', 'short_desc', 'image', 'password', 'created_at', 'updated_at',
     ];
 
     /**
@@ -71,6 +71,11 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany ('App\UserMessage');
     }
+
+    public function personal(){
+        return $this->hasMany ('App\Personal');
+    }
+
 
     // Local Scope
 

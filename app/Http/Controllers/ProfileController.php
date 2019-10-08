@@ -16,7 +16,7 @@ use App\UserMessage;
 use App\Work;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use Barryvdh\Snappy\Facades\SnappyPdf as PDF;
+
 
 
 class ProfileController extends Controller
@@ -43,7 +43,7 @@ class ProfileController extends Controller
     public function pdfView($username){
             $user = User::where('username', $username)->first();
 
-            return view('profilepdf', compact ('user'));
+            return view('pdf', compact ('user'));
     }
 
     public function download($username){
@@ -56,10 +56,19 @@ class ProfileController extends Controller
 
     public function pdfMaker($username){
         $user = User::where('username', $username)->first();
-
-        $pdfMake = PDF::loadView('profilepdf', ['user' => $user]);
+        $resumes = Resume::where('user_id',$user->id)->where('option', 1)->paginate(3);
+        $skills = Skill::where('user_id', $user->id)->latest()->paginate(3);
+        $pdf = \PDF::loadView('profilepdf', ['user' => $user, 'resumes' => $resumes, 'skills' => $skills])->setPaper('a4')->setOrientation('portrait');
+        $pdf->setOption('enable-javascript', true);
+        $pdf->setOption('javascript-delay', 5000);
+        $pdf->setOption('enable-smart-shrinking', true);
+        $pdf->setOption('no-stop-slow-scripts', true);
         $fileName = $user->name;
-        return $pdfMake->stream($fileName . '.pdf');
+        return $pdf->stream($fileName . '.pdf');
+
+//        $pdfMake = PDF::loadView('profilepdf', ['user' => $user])->setPaper ('a4', 'portrait');
+//        $fileName = $user->name;
+//        return $pdfMake->stream($fileName . '.pdf');
     }
 
 

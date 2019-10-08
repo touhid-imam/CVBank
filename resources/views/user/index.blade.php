@@ -39,8 +39,8 @@
                             </div>
 
                             <div class="cover-content-wrapper">
-                                            <span class="about-description">Hello. I am a
-                                                <span class="rw-words">                          <span><strong>{{ $user->name }}</strong></span>
+                                            <span class="about-description">Hello. I am
+                                                <span class="rw-word">                          <span><strong>{{ $user->name }}</strong></span>
                                             </span>
                                             <br>{{ str_limit($user->short_desc, '100') }}</span>
                                 <span class="status">
@@ -298,7 +298,7 @@
                         <a href=".{{ $post->slug }}" class="ex-link open_popup" data-effect="mfp-zoom-out"><i class="fa fa-plus-square-o"></i></a>
                         <div class="date pull-left">
                             <span class="day">{{ date("j", strtotime($post->created_at)) }}</span>
-                            <span class="month">{{ strtoupper(date("F", strtotime($post->created_at))) }}</span>
+                            <span class="month">{{ strtoupper(date("M", strtotime($post->created_at))) }}</span>
                             <span class="year">{{ date("Y", strtotime($post->created_at)) }}</span>
                         </div>
                         <div class="media-body">

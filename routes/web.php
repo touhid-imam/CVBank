@@ -12,7 +12,7 @@
 */
 
 
-use Barryvdh\DomPDF\Facade as PDF;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -25,13 +25,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/user/{slug}', 'ProfileController@userProfile')->name('profile');
-//Route::get('/user/{slug}/profile-pdf', 'ProfileController@pdfView');
+Route::get('/user/{slug}/profile-pdf', 'ProfileController@pdfView');
 //Route::get('/user/{slug}/pdf', 'ProfileController@download');
 
 Route::post('/sendmail/send', 'ProfileController@send')->name('sendEmail');
 Route::get('/search', 'SearchController@userSearch')->name('userSearch');
+Route::get('/search/live', 'SearchController@liveSearch')->name('live.search');
 
-Route::get('/user/{username}/profile-pdf', 'ProfileController@pdfMaker')->name('pdfDownload');
+Route::get('/user/{username}/pdf', 'ProfileController@pdfMaker')->name('pdfDownload');
 
 Auth::routes(['verify' => true]);
 
@@ -77,6 +78,7 @@ Route::group(['as' => 'jobseeker.', 'prefix' => 'jobseeker', 'namespace' => 'Job
     route::get('profile', 'UserProfile@index')->name('profile');
     route::patch('profile-update', 'UserProfile@profileUpdate')->name('profile.update');
     route::patch('password-update', 'UserProfile@passwordUpdate')->name('password-update');
+    route::patch('personal-update', 'UserProfile@personalUpdate')->name('personal.update');
     route::resource('hobbies-facts', 'HobbyFactController');
     route::resource('resumes', 'ResumesController');
     route::resource ('team', 'TeamController');
