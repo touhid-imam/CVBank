@@ -10,7 +10,7 @@
 <!-- PLUGIN SCRIPTS -->
 
 <script src="{{ asset ('public/front/js/libs.js') }}"></script>
-
+@stack('script')
 <!-- END PLUGIN SCRIPTS -->
 </body>
 

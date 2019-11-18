@@ -2,7 +2,48 @@
 
 @section('title', 'Home')
 
+@push('css')
+    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
+    <style>
+        .pagination {
+            text-align: center;
+            display: inline-block;
+        }
+        .block-27 ul.pagination li {
+            display: inline-block;
+            margin-bottom: 4px;
+            font-weight: 400;
 
+        }
+
+        .block-27 ul.pagination li a, .block-27 ul.pagination li span {
+            color: #5dd28e;
+            text-align: center;
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            border-radius: 50%;
+            border: 1px solid #cccccc;
+        }
+        .block-27 ul.pagination li.active a, .block-27 ul.pagination li.active span {
+            background: #5dd28e;
+            color: #fff;
+            border: 1px solid transparent;
+            margin: 0;
+            padding: 0;
+        }
+        .block-27 ul.pagination li a, .page-item.disabled .page-link{
+            margin: 0;
+            padding: 0;
+        }
+        .page-item:first-child .page-link, .page-item:last-child .page-link {
+            margin-left: 0;
+            border-radius: 50%;
+        }
+    </style>
+
+@endpush
 
 @section('hero-area')
 
@@ -29,13 +70,13 @@
                                 <div class="tab-content p-4" id="v-pills-tabContent">
 
                                     <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-nextgen-tab">
-                                        <form action="#" class="search-job">
+                                        <form action="{{ route ('jobs.search') }}" method="GET" class="search-job">
                                             <div class="row">
                                                 <div class="col-md">
                                                     <div class="form-group">
                                                         <div class="form-field">
                                                             <div class="icon"><span class="icon-briefcase"></span></div>
-                                                            <input type="text" class="form-control" placeholder="eg. Garphic. Web Developer">
+                                                            <input type="text" name="job_name" class="form-control" placeholder="eg. Garphic. Web Developer">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -44,13 +85,11 @@
                                                         <div class="form-field">
                                                             <div class="select-wrap">
                                                                 <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                                                <select name="" id="" class="form-control">
-                                                                    <option value="">Category</option>
-                                                                    <option value="">Full Time</option>
-                                                                    <option value="">Part Time</option>
-                                                                    <option value="">Freelance</option>
-                                                                    <option value="">Internship</option>
-                                                                    <option value="">Temporary</option>
+                                                                <select name="job_role" id="job_role" class="form-control">
+                                                                    @foreach($job_roles as $key=>$job_role)
+                                                                        <option value="{{ $job_role->id }}">{{ $job_role->name }}</option>
+
+                                                                    @endforeach
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -60,7 +99,7 @@
                                                     <div class="form-group">
                                                         <div class="form-field">
                                                             <div class="icon"><span class="icon-map-marker"></span></div>
-                                                            <input type="text" class="form-control" placeholder="Location">
+                                                            <input type="text" name="job_location" class="form-control" placeholder="Location">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -91,13 +130,11 @@
                                                         <div class="form-field">
                                                             <div class="select-wrap">
                                                                 <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                                                <select name="" id="" class="form-control">
-                                                                    <option value="">Category</option>
-                                                                    <option value="">Full Time</option>
-                                                                    <option value="">Part Time</option>
-                                                                    <option value="">Freelance</option>
-                                                                    <option value="">Internship</option>
-                                                                    <option value="">Temporary</option>
+                                                                <select name="job_role" id="job_role" class="form-control">
+                                                                    @foreach($job_roles as $key=>$job_role)
+                                                                    <option value="{{ $job_role->id }}">{{ $job_role->name }}</option>
+
+                                                                    @endforeach
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -107,7 +144,7 @@
                                                     <div class="form-group">
                                                         <div class="form-field">
                                                             <div class="icon"><span class="icon-map-marker"></span></div>
-                                                            <input type="text" class="form-control" placeholder="Location">
+                                                            <input type="text" name="job_location" class="form-control" placeholder="Location">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -187,40 +224,18 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-3 ftco-animate">
-                    <ul class="category">
-                        <li><a href="#">Web Development <span class="number" data-number="1000">0</span></a></li>
-                        <li><a href="#">Graphic Designer <span class="number" data-number="1000">0</span></a></li>
-                        <li><a href="#">Multimedia <span class="number" data-number="2000">0</span></a></li>
-                        <li><a href="#">Advertising <span class="number" data-number="900">0</span></a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3 ftco-animate">
-                    <ul class="category">
-                        <li><a href="#">Education &amp; Training <span class="number" data-number="3500">0</span></a></li>
-                        <li><a href="#">English <span class="number" data-number="1560">0</span></a></li>
-                        <li><a href="#">Social Media <span class="number" data-number="1000">0</span></a></li>
-                        <li><a href="#">Writing <span class="number" data-number="2500">0</span></a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3 ftco-animate">
-                    <ul class="category">
-                        <li><a href="#">PHP Programming <span class="number" data-number="5500">0</span></a></li>
-                        <li><a href="#">Project Management <span class="number" data-number="2000">0</span></a></li>
-                        <li><a href="#">Finance Management <span class="number" data-number="800">0</span></a></li>
-                        <li><a href="#">Office &amp; Admin <span class="number" data-number="7000">0</span></a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3 ftco-animate">
-                    <ul class="category">
-                        <li><a href="#">Web Designer <span><span class="number" data-number="8000">0</span></span></a></li>
-                        <li><a href="#">Customer Service <span class="number" data-number="4000">0</span></a></li>
-                        <li><a href="#">Marketing &amp; Sales <span class="number" data-number="3300">0</span></a></li>
-                        <li><a href="#">Software Development <span class="number" data-number="1356">0</span></a></li>
-                    </ul>
-                </div>
+                @foreach($categories as $jobCategory)
+
+                        @if($jobCategory->jobPosts->count() != 0)
+                        <div style="margin: 0 15px;" class="col-md-3 ftco-animate category">
+                            <li><a href="#">{{ $jobCategory->name }} <span class="number" data-number="{{ $jobCategory->jobPosts->count() }}">{{ $jobCategory->jobPosts->count() }}</span></a></li>
+                        </div>
+                        @endif
+
+                @endforeach
             </div>
-        </div>
+
+            </div>
     </section>
 
     <section class="ftco-section bg-light">
@@ -232,267 +247,65 @@
                 </div>
             </div>
             <div class="row">
+                @foreach($jobPosts as $jobPost)
                 <div class="col-md-12 ftco-animate">
 
                     <div class="job-post-item bg-white p-4 d-block d-md-flex align-items-center">
 
                         <div class="mb-4 mb-md-0 mr-5">
                             <div class="job-post-item-header d-flex align-items-center">
-                                <h2 class="mr-3 text-black h3">Frontend Development</h2>
+                                <h2 class="mr-3 text-black h3">{{ $jobPost->title }}</h2>
                                 <div class="badge-wrap">
-                                    <span class="bg-primary text-white badge py-2 px-3">Partime</span>
+                                    <span class="bg-primary text-white badge py-2 px-3">{{ $jobPost->job_type->name }}</span>
                                 </div>
                             </div>
                             <div class="job-post-item-body d-block d-md-flex">
-                                <div class="mr-3"><span class="icon-layers"></span> <a href="#">Facebook, Inc.</a></div>
-                                <div><span class="icon-my_location"></span> <span>Western City, UK</span></div>
+                                <div class="mr-3"><span class="icon-layers"></span> <a href="#">{{ $jobPost->company }}</a></div>
+                                <div><span class="icon-my_location"></span> <span>{{ $jobPost->location }}</span></div>
                             </div>
                         </div>
 
                         <div class="ml-auto d-flex">
-                            <a href="job-single.html" class="btn btn-primary py-2 mr-1">Apply Job</a>
-                            <a href="#" class="btn btn-secondary rounded-circle btn-favorite d-flex align-items-center icon">
+                            @if(Auth::guest())
+                            <a href="javascript:void(0)" onclick="toastr.info('You need to login first for applying on this job', 'info', {
+                                closeButton: true,
+                                progressBar: true
+                            })" class="btn btn-primary py-2 mr-1">Apply Job</a>
+                            <a href="javascript:void(0)" onclick="toastr.info('You need to login first for adding favourite list.', 'info', {
+                                closeButton: true,
+                                progressBar: true
+                            })" class="btn btn-secondary rounded-circle btn-favorite d-flex align-items-center icon">
                                 <span class="icon-heart"></span>
                             </a>
-                        </div>
+                            @else
+
+                                    <a href="javascript:void(0)" onclick="" class="btn btn-primary py-2 mr-1">Apply Job</a>
+                                    {{--<a href="javascript:void(0)" onclick="document.getElementById('favourite-form-{{ $jobPost->id }}').submit()" class="btn {{ $jobPost->favourite_to_users->count() == 1 ? "btn-danger" : 'btn-secondary icon' }} rounded-circle btn-favorite d-flex align-items-center">--}}
+                                        {{--<span class="icon-heart"></span>--}}
+                                    {{--</a>--}}
+
+                                    <a href="javascript:void(0)" onclick="favourite({{ $jobPost->id }})" id="favourite_job" class="btn {{ $jobPost->favourite_to_users->count() == 1 ? 'btn-danger'  : "btn-secondary icon" }} rounded-circle btn-favorite d-flex align-items-center">
+                                    <span class="icon-heart"></span>
+                                    </a>
+
+                            @endif                        </div>
                     </div>
                 </div><!-- end -->
-
-                <div class="col-md-12 ftco-animate">
-                    <div class="job-post-item bg-white p-4 d-block d-md-flex align-items-center">
-
-                        <div class="mb-4 mb-md-0 mr-5">
-                            <div class="job-post-item-header d-flex align-items-center">
-                                <h2 class="mr-3 text-black h4">Full Stack Developer</h2>
-                                <div class="badge-wrap">
-                                    <span class="bg-warning text-white badge py-2 px-3">Full Time</span>
-                                </div>
-                            </div>
-                            <div class="job-post-item-body d-block d-md-flex">
-                                <div class="mr-3"><span class="icon-layers"></span> <a href="#">Google, Inc.</a></div>
-                                <div><span class="icon-my_location"></span> <span>Western City, UK</span></div>
-                            </div>
-                        </div>
-
-                        <div class="ml-auto d-flex">
-                            <a href="job-single.html" class="btn btn-primary py-2 mr-1">Apply Job</a>
-                            <a href="#" class="btn btn-danger rounded-circle btn-favorite d-flex align-items-center">
-                                <span class="icon-heart"></span>
-                            </a>
-                        </div>
-
-                    </div>
-                </div> <!-- end -->
-                <div class="col-md-12 ftco-animate">
-                    <div class="job-post-item bg-white p-4 d-block d-md-flex align-items-center">
-
-                        <div class="mb-4 mb-md-0 mr-5">
-                            <div class="job-post-item-header d-flex align-items-center">
-                                <h2 class="mr-3 text-black h4">Open Source Interactive Developer</h2>
-                                <div class="badge-wrap">
-                                    <span class="bg-info text-white badge py-2 px-3">Freelance</span>
-                                </div>
-                            </div>
-                            <div class="job-post-item-body d-block d-md-flex">
-                                <div class="mr-3"><span class="icon-layers"></span> <a href="#">New York Times</a></div>
-                                <div><span class="icon-my_location"></span> <span>Western City, UK</span></div>
-                            </div>
-                        </div>
-
-                        <div class="ml-auto d-flex">
-                            <a href="job-single.html" class="btn btn-primary py-2 mr-1">Apply Job</a>
-                            <a href="#" class="btn btn-secondary rounded-circle btn-favorite d-flex align-items-center icon">
-                                <span class="icon-heart"></span>
-                            </a>
-                        </div>
-                    </div>
-                </div> <!-- end -->
-                <div class="col-md-12 ftco-animate">
-
-                    <div class="job-post-item bg-white p-4 d-block d-md-flex align-items-center">
-
-                        <div class="mb-4 mb-md-0 mr-5">
-                            <div class="job-post-item-header d-flex align-items-center">
-                                <h2 class="mr-3 text-black h4">Frontend Development</h2>
-                                <div class="badge-wrap">
-                                    <span class="bg-secondary text-white badge py-2 px-3">Internship</span>
-                                </div>
-                            </div>
-                            <div class="job-post-item-body d-block d-md-flex">
-                                <div class="mr-3"><span class="icon-layers"></span> <a href="#">Facebook, Inc.</a></div>
-                                <div><span class="icon-my_location"></span> <span>Western City, UK</span></div>
-                            </div>
-                        </div>
-
-                        <div class="ml-auto d-flex">
-                            <a href="job-single.html" class="btn btn-primary py-2 mr-1">Apply Job</a>
-                            <a href="#" class="btn btn-secondary rounded-circle btn-favorite d-flex align-items-center icon">
-                                <span class="icon-heart"></span>
-                            </a>
-                        </div>
-                    </div>
-                </div> <!-- end -->
-                <div class="col-md-12 ftco-animate">
-                    <div class="job-post-item bg-white p-4 d-block d-md-flex align-items-center">
-
-                        <div class="mb-4 mb-md-0 mr-5">
-                            <div class="job-post-item-header d-flex align-items-center">
-                                <h2 class="mr-3 text-black h4">Open Source Interactive Developer</h2>
-                                <div class="badge-wrap">
-                                    <span class="bg-danger text-white badge py-2 px-3">Temporary</span>
-                                </div>
-                            </div>
-                            <div class="job-post-item-body d-block d-md-flex">
-                                <div class="mr-3"><span class="icon-layers"></span> <a href="#">New York Times</a></div>
-                                <div><span class="icon-my_location"></span> <span>Western City, UK</span></div>
-                            </div>
-                        </div>
-
-                        <div class="ml-auto d-flex">
-                            <a href="job-single.html" class="btn btn-primary py-2 mr-1">Apply Job</a>
-                            <a href="#" class="btn btn-secondary rounded-circle btn-favorite d-flex align-items-center icon">
-                                <span class="icon-heart"></span>
-                            </a>
-                        </div>
-                    </div>
-                </div> <!-- end -->
-                <div class="col-md-12 ftco-animate">
-
-                    <div class="job-post-item bg-white p-4 d-block d-md-flex align-items-center">
-
-                        <div class="mb-4 mb-md-0 mr-5">
-                            <div class="job-post-item-header d-flex align-items-center">
-                                <h2 class="mr-3 text-black h3">Frontend Development</h2>
-                                <div class="badge-wrap">
-                                    <span class="bg-primary text-white badge py-2 px-3">Partime</span>
-                                </div>
-                            </div>
-                            <div class="job-post-item-body d-block d-md-flex">
-                                <div class="mr-3"><span class="icon-layers"></span> <a href="#">Facebook, Inc.</a></div>
-                                <div><span class="icon-map-marker"></span> <span>Western City, UK</span></div>
-                            </div>
-                        </div>
-
-                        <div class="ml-auto d-flex">
-                            <a href="job-single.html" class="btn btn-primary py-2 mr-1">Apply Job</a>
-                            <a href="#" class="btn btn-secondary rounded-circle btn-favorite d-flex align-items-center icon">
-                                <span class="icon-heart"></span>
-                            </a>
-                        </div>
-                    </div>
-                </div><!-- end -->
-
-                <div class="col-md-12 ftco-animate">
-                    <div class="job-post-item bg-white p-4 d-block d-md-flex align-items-center">
-
-                        <div class="mb-4 mb-md-0 mr-5">
-                            <div class="job-post-item-header d-flex align-items-center">
-                                <h2 class="mr-3 text-black h4">Full Stack Developer</h2>
-                                <div class="badge-wrap">
-                                    <span class="bg-warning text-white badge py-2 px-3">Full Time</span>
-                                </div>
-                            </div>
-                            <div class="job-post-item-body d-block d-md-flex">
-                                <div class="mr-3"><span class="icon-layers"></span> <a href="#">Google, Inc.</a></div>
-                                <div><span class="icon-my_location"></span> <span>Western City, UK</span></div>
-                            </div>
-                        </div>
-
-                        <div class="ml-auto d-flex">
-                            <a href="job-single.html" class="btn btn-primary py-2 mr-1">Apply Job</a>
-                            <a href="#" class="btn btn-secondary rounded-circle btn-favorite d-flex align-items-center icon">
-                                <span class="icon-heart"></span>
-                            </a>
-                        </div>
-
-                    </div>
-                </div> <!-- end -->
-                <div class="col-md-12 ftco-animate">
-                    <div class="job-post-item bg-white p-4 d-block d-md-flex align-items-center">
-
-                        <div class="mb-4 mb-md-0 mr-5">
-                            <div class="job-post-item-header d-flex align-items-center">
-                                <h2 class="mr-3 text-black h4">Open Source Interactive Developer</h2>
-                                <div class="badge-wrap">
-                                    <span class="bg-info text-white badge py-2 px-3">Freelance</span>
-                                </div>
-                            </div>
-                            <div class="job-post-item-body d-block d-md-flex">
-                                <div class="mr-3"><span class="icon-layers"></span> <a href="#">New York Times</a></div>
-                                <div><span class="icon-my_location"></span> <span>Western City, UK</span></div>
-                            </div>
-                        </div>
-
-                        <div class="ml-auto d-flex">
-                            <a href="job-single.html" class="btn btn-primary py-2 mr-1">Apply Job</a>
-                            <a href="#" class="btn btn-secondary rounded-circle btn-favorite d-flex align-items-center icon">
-                                <span class="icon-heart"></span>
-                            </a>
-                        </div>
-                    </div>
-                </div> <!-- end -->
-                <div class="col-md-12 ftco-animate">
-
-                    <div class="job-post-item bg-white p-4 d-block d-md-flex align-items-center">
-
-                        <div class="mb-4 mb-md-0 mr-5">
-                            <div class="job-post-item-header d-flex align-items-center">
-                                <h2 class="mr-3 text-black h4">Frontend Development</h2>
-                                <div class="badge-wrap">
-                                    <span class="bg-secondary text-white badge py-2 px-3">Internship</span>
-                                </div>
-                            </div>
-                            <div class="job-post-item-body d-block d-md-flex">
-                                <div class="mr-3"><span class="icon-layers"></span> <a href="#">Facebook, Inc.</a></div>
-                                <div><span class="icon-my_location"></span> <span>Western City, UK</span></div>
-                            </div>
-                        </div>
-
-                        <div class="ml-auto d-flex">
-                            <a href="job-single.html" class="btn btn-primary py-2 mr-1">Apply Job</a>
-                            <a href="#" class="btn btn-secondary rounded-circle btn-favorite d-flex align-items-center icon">
-                                <span class="icon-heart"></span>
-                            </a>
-                        </div>
-                    </div>
-                </div> <!-- end -->
-                <div class="col-md-12 ftco-animate">
-                    <div class="job-post-item bg-white p-4 d-block d-md-flex align-items-center">
-
-                        <div class="mb-4 mb-md-0 mr-5">
-                            <div class="job-post-item-header d-flex align-items-center">
-                                <h2 class="mr-3 text-black h4">Open Source Interactive Developer</h2>
-                                <div class="badge-wrap">
-                                    <span class="bg-danger text-white badge py-2 px-3">Temporary</span>
-                                </div>
-                            </div>
-                            <div class="job-post-item-body d-block d-md-flex">
-                                <div class="mr-3"><span class="icon-layers"></span> <a href="#">New York Times</a></div>
-                                <div><span class="icon-my_location"></span> <span>Western City, UK</span></div>
-                            </div>
-                        </div>
-
-                        <div class="ml-auto d-flex">
-                            <a href="job-single.html" class="btn btn-primary py-2 mr-1">Apply Job</a>
-                            <a href="#" class="btn btn-secondary rounded-circle btn-favorite d-flex align-items-center icon">
-                                <span class="icon-heart"></span>
-                            </a>
-                        </div>
-                    </div>
-                </div> <!-- end -->
+                @endforeach
             </div>
             <div class="row mt-5">
                 <div class="col text-center">
                     <div class="block-27">
-                        <ul>
-                            <li><a href="#">&lt;</a></li>
-                            <li class="active"><span>1</span></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#">&gt;</a></li>
-                        </ul>
+                        {{ $jobPosts->links() }}
+                        {{--<ul>--}}
+                            {{--<li><a href="#">&lt;</a></li>--}}
+                            {{--<li class="active"><span>1</span></li>--}}
+                            {{--<li><a href="#">2</a></li>--}}
+                            {{--<li><a href="#">3</a></li>--}}
+                            {{--<li><a href="#">4</a></li>--}}
+                            {{--<li><a href="#">5</a></li>--}}
+                            {{--<li><a href="#">&gt;</a></li>--}}
+                        {{--</ul>--}}
                     </div>
                 </div>
             </div>
@@ -507,7 +320,7 @@
                         <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
                             <div class="block-18 text-center">
                                 <div class="text">
-                                    <strong class="number" data-number="1350000">0</strong>
+                                    <strong class="number" data-number="{{ $jobPosts->count() }}">0</strong>
                                     <span>Jobs</span>
                                 </div>
                             </div>
@@ -515,7 +328,7 @@
                         <div class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
                             <div class="block-18 text-center">
                                 <div class="text">
-                                    <strong class="number" data-number="40000">0</strong>
+                                    <strong class="number" data-number="{{ $users->count() }}">0</strong>
                                     <span>Members</span>
                                 </div>
                             </div>
@@ -641,7 +454,7 @@
             <div class="row d-flex">
                 <div class="col-md-3 d-flex ftco-animate">
                     <div class="blog-entry align-self-stretch">
-                        <a href="blog-single.html" class="block-20" style="background-image: url('images/image_1.jpg');">
+                        <a href="blog-single.html" class="block-20" style="background-image: url({{asset ('public/front/assets/images/image_1.jpg')}});">
                         </a>
                         <div class="text mt-3">
                             <div class="meta mb-2">
@@ -656,7 +469,7 @@
                 </div>
                 <div class="col-md-3 d-flex ftco-animate">
                     <div class="blog-entry align-self-stretch">
-                        <a href="blog-single.html" class="block-20" style="background-image: url('images/image_2.jpg');">
+                        <a href="blog-single.html" class="block-20" style="background-image: url({{asset ('public/front/assets/images/image_2.jpg')}});">
                         </a>
                         <div class="text mt-3">
                             <div class="meta mb-2">
@@ -671,7 +484,7 @@
                 </div>
                 <div class="col-md-3 d-flex ftco-animate">
                     <div class="blog-entry align-self-stretch">
-                        <a href="blog-single.html" class="block-20" style="background-image: url('images/image_3.jpg');">
+                        <a href="blog-single.html" class="block-20" style="background-image: url({{asset ('public/front/assets/images/image_3.jpg')}});">
                         </a>
                         <div class="text mt-3">
                             <div class="meta mb-2">
@@ -686,7 +499,7 @@
                 </div>
                 <div class="col-md-3 d-flex ftco-animate">
                     <div class="blog-entry align-self-stretch">
-                        <a href="blog-single.html" class="block-20" style="background-image: url('images/image_4.jpg');">
+                        <a href="blog-single.html" class="block-20" style="background-image: url({{asset ('public/front/assets/images/image_4.jpg')}});">
                         </a>
                         <div class="text mt-3">
                             <div class="meta mb-2">
@@ -726,3 +539,51 @@
         </div>
     </section>
 @stop
+
+
+@push('js')
+    <script src="//cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+    {!! Toastr::message() !!}
+
+    <script>
+        @if($errors->any())
+        @foreach($errors->all() as $error)
+        toastr.error('{{ $error }}', 'Error', {
+            "closeButton": true,
+            "progressBar": true
+        });
+        @endforeach
+        @endif
+
+        $.ajaxSetup({
+
+            headers: {
+
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+
+            }
+
+        });
+
+        function favourite($job_id){
+
+            var post = $job_id;
+
+            $.ajax({
+                type:'POST',
+                url: '{{ route("jobpost.favourite") }}',
+                data:{post : post},
+                success:function(data){
+                    if(data.class === 1){
+                        $('#favourite_job').removeClass('btn-secondary icon');
+                        $('#favourite_job').addClass('btn-danger').css('color', '#ffffff');
+                    } else{
+                        $('#favourite_job').removeClass('btn-danger');
+                        $('#favourite_job').addClass('btn-secondary icon').css('color', '#D9D9D9');
+                    }
+                }
+            });
+
+        }
+    </script>
+@endpush

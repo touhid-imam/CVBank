@@ -16,6 +16,7 @@ class UsersTableSeeder extends Seeder
     {
         DB::table('users')->insert ([
             'role_id'      => 1,
+            'job_role'     => 1,
             'name'      => 'Mr. Admin',
             'username'      => 'admin',
             'email'      => 'admin@mail.com',
@@ -23,6 +24,7 @@ class UsersTableSeeder extends Seeder
         ]);
         DB::table('users')->insert ([
             'role_id'      => 2,
+            'job_role'     => 1,
             'name'      => 'Hiring Manager',
             'username'      => 'hiring-manager',
             'email'      => 'manager@mail.com',
@@ -30,6 +32,7 @@ class UsersTableSeeder extends Seeder
         ]);
         DB::table('users')->insert ([
             'role_id'      => 3,
+            'job_role'     => 1,
             'name'      => 'Job Seeker',
             'username'      => 'Job Seeker',
             'email'      => 'jobseeker@mail.com',

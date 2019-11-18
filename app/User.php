@@ -16,7 +16,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'slug', 'username', 'role_id', 'email', 'education', 'location', 'phone', 'availability', 'short_desc', 'image', 'password', 'created_at', 'updated_at',
+        'name', 'slug', 'username', 'role_id', 'job_role', 'email', 'education', 'location', 'phone', 'availability', 'short_desc', 'image', 'password', 'created_at', 'updated_at',
     ];
 
     /**
@@ -41,6 +41,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function role()
     {
         return $this->belongsTo ('App\Role');
+    }
+
+    public function job_type()
+    {
+        return $this->belongsTo ('App\JobType', 'job_role', 'id');
     }
 
     public function hobby_facts(){
@@ -73,7 +78,15 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     public function personal(){
-        return $this->hasMany ('App\Personal');
+        return $this->hasOne ('App\Personal');
+    }
+
+    public function job_post(){
+        return $this->hasMany ('App\JobPost');
+    }
+
+    public function favourite_job_posts(){
+        return $this->belongsToMany ('App\JobPost', 'jobpost_user', 'user_id', 'job_post_id')->withTimestamps ();
     }
 
 

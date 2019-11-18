@@ -76,6 +76,17 @@
                             </ul>
                         </div>
                     </li>
+
+                    <li>
+                        <a {{ Request::is('admin/jobs*') ? 'class=active' : 'class=collapsed'}} href="#jobs" data-toggle="collapse"><i class="lnr lnr-magnifier"></i> <span>Jobs</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+                        <div id="jobs" {{ Request::is('admin/jobs*') ? 'class="collapse in"' : 'class=collapse'}}>
+                            <ul class="nav">
+                                <li><a {{ Request::is('admin/jobs') ? 'class=active' : ' '}} href="{{ route('admin.jobs.index') }}">Job Lists</a></li>
+                                <li><a {{ Request::is('admin/jobs/create') ? 'class=active' : ' '}} href="{{ route ('admin.jobs.create') }}">Create Jobs</a></li>
+
+                            </ul>
+                        </div>
+                    </li>
                     <br/>
                     <hr/>
 

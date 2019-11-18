@@ -64,6 +64,9 @@
         .info-wrapper ul li{
             font-family: 'Roboto', sans-serif;
             font-size: 26px;
+            width: 100%;
+            display: block;
+            padding: 20px 0;
         }
         ul li span.heading{
             font-weight: bold;
@@ -120,6 +123,10 @@
             page-break-after: always;
             page-break-inside: avoid;
         }
+        /*.heading {*/
+            /*min-width: 16%;*/
+            /*display: inline-block;*/
+        /*}*/
     </style>
 </head>
 <body>
@@ -220,13 +227,63 @@
 
                 <div style="padding-top: 25px" class="info-wrapper">
                     <ul>
-                        <li><span class="heading">Father's Name:</span> Touhid Imam</li>
-                        <li><span class="heading">Mother's Name:</span> Zakia Sultana</li>
-                        <li><span class="heading">Birthday:</span> 15 Jan 1993</li>
-                        <li><span class="heading">Nationality:</span> Bangladeshi</li>
-                        <li><span class="heading">Marital Status:</span> Single</li>
-                        <li><span class="heading">Sex:</span> Male</li>
-                        <li><span class="heading">Language:</span> Bangla, English</li>
+                        <li>
+                            <div style="width: 17%; float: left;" class="heading">
+                                <span class="heading">Father's Name:</span>
+                            </div>
+                            <div style="width: 83%;float: left;" class="personal-content">
+                                {{ $user->personal->father_name }}
+                            </div>
+                         </li>
+                        <li>
+                            <div style="width: 17%; float: left;" class="heading">
+                                <span class="heading">Mother's Name:</span>
+                            </div>
+                            <div style="width: 83%;float: left;" class="personal-content">
+                                {{ $user->personal->mother_name }}
+                            </div>
+                        </li>
+                        <li>
+                            <div style="width: 17%; float: left;" class="heading">
+                                <span class="heading">Birthday:</span>
+                            </div>
+                            <div style="width: 83%;float: left;" class="personal-content">
+                                {{ date('d M Y', strtotime ($user->personal->date_of_birth)) }}
+                            </div>
+                        </li>
+                        <li>
+                            <div style="width: 17%; float: left;" class="heading">
+                                <span class="heading">Nationality:</span>
+                            </div>
+                            <div style="width: 83%;float: left;" class="personal-content">
+                                {{ $user->personal->nationality }}
+                            </div>
+                        </li>
+                        <li>
+                            <div style="width: 17%; float: left;" class="heading">
+                                <span class="heading">Marital Status:</span>
+                            </div>
+                            <div style="width: 83%;float: left;" class="personal-content">
+                                {{ $user->personal->merital_status }}
+                            </div>
+                        </li>
+                        <li>
+                            <div style="width: 17%; float: left;" class="heading">
+                                <span class="heading">Sex:</span>
+                            </div>
+                            <div style="width: 83%;float: left;" class="personal-content">
+                                {{ $user->personal->sex }}
+                            </div>
+                        </li>
+                        <li>
+                            <div style="width: 17%; float: left;" class="heading">
+                                <span class="heading">Language:</span>
+                            </div>
+                            <div style="width: 83%;float: left;" class="personal-content">
+                                {{ $user->personal->language }}
+                            </div>
+                        </li>
+
                     </ul>
                 </div>
 
@@ -243,13 +300,31 @@
 
                 <div style="padding-top: 25px" class="info-wrapper">
                     <ul>
-                        <li><span class="heading">Phone: </span> {{ $user->phone }}</li>
-                        <li><span class="heading">Email: </span> {{ $user->email }}</li>
-                        <li><span class="heading">Present Address:</span> 15 Jan 1993</li>
-                        <li><span class="heading">Permanent Address:</span> Bangladeshi</li>
-                        <li><span class="heading">Marital Status:</span> Single</li>
-                        <li><span class="heading">Sex:</span> Male</li>
-                        <li><span class="heading">Language:</span> Bangla, English</li>
+                        <li>
+                            <div style="width: 32%; float: left;" class="heading">
+                                <span class="heading">Phone: </span>
+                            </div>
+                            <div style="width: 68%;float: left;" class="personal-content">
+                                {{ $user->personal->phone_num }}
+                            </div>
+                        </li>
+                        <li>
+                            <div style="width: 32%; float: left;" class="heading">
+                                <span class="heading">Present Address:</span>
+                            </div>
+                            <div style="width: 68%;float: left;padding-bottom: 25px" class="personal-content">
+                                {!! $user->personal->present_address !!}
+                            </div>
+                        </li>
+                        <li >
+                            <div style="width: 32%; float: left;" class="heading">
+                                <span class="heading">Permanent Address:</span>
+                            </div>
+                            <div style="width: 68%;float: left;" class="personal-content">
+                                {!! $user->personal->permanent_address !!}
+                            </div>
+                        </li>
+
                     </ul>
                 </div>
 

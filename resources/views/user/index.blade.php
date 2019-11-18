@@ -503,12 +503,12 @@
                     </div>
                 @endif
 
-                @if($message = Session::get('emailSend'))
-                        <div class="alert alert-success alert-dismissible text-left">
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                            <strong>{{ $message }}</strong>
-                        </div>
-                @endif
+
+                <div class="alert alert-success alert-dismissible text-left">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong></strong>
+                </div>
+
                 <form method="POST" action="{{ route('sendEmail') }}">
                     @csrf
                     <input type="text" name="name" id="name" placeholder="NAME" required />
@@ -517,7 +517,6 @@
                     <input type="hidden" name="userId" value="{{ $user->id }}">
 
                     <input type="submit" value="SEND MESSAGE" class="submit_btn" id="submit_btn">
-
                 </form>
             </fieldset>
             <!-- End Contact Form -->
@@ -526,3 +525,52 @@
     <!-- End Contact Section -->
 
 @stop
+
+@push('script')
+
+    <script>
+        $.ajaxSetup({
+
+            headers: {
+
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+
+            }
+
+        });
+
+        $('.alert.alert-success').hide();
+
+        $(".submit_btn").click(function(e){
+
+            e.preventDefault();
+
+            var name = $("input[name=name]").val();
+
+            var email = $("input[name=email]").val();
+
+            var message = $("textarea[name=message]").val();
+
+            var userId = $("input[name=userId]").val();
+
+
+
+            $.ajax({
+                type:'POST',
+                url: '{{ route("sendEmail") }}',
+                data:{name:name, email:email, message:message, userId: userId},
+                success:function(data){
+                    if(data.success){
+                        $('.alert.alert-success').show();
+                        $('.alert.alert-success strong').html(data.success);
+                    }
+
+                }
+            });
+
+
+
+        });
+    </script>
+
+@endpush

@@ -161,8 +161,7 @@ class UserProfile extends Controller
             'permanent_address' => 'required',
         ]);
 
-
-        $personal = Personal::findOrFail($request->id);
+        $personal = Personal::findOrFail($request->id)->where('user_id', Auth::id())->first();
         $personal->father_name          = $request->father_name;
         $personal->mother_name          = $request->mother_name;
         $personal->date_of_birth        = $request->date_of_birth;
@@ -178,7 +177,7 @@ class UserProfile extends Controller
 
         Toastr::success('Your Personal information Updated', 'Success');
 
-        return redirect ()->back();
+        return redirect ()->back ();
 
     }
 

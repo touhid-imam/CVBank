@@ -107,6 +107,7 @@
                     <ul class="nav" role="tablist">
                         <li class="active"><a href="#tab-bottom-left1" role="tab" data-toggle="tab">Update Profile Info.</a></li>
                         <li><a href="#tab-bottom-left2" role="tab" data-toggle="tab">Update Password</a></li>
+                        <li><a href="#tab-bottom-left3" role="tab" data-toggle="tab">Personal Info.</a></li>
                     </ul>
                 </div>
                 <div class="tab-content">
@@ -181,6 +182,76 @@
                             <input type="submit" value="Update Password" class="btn btn-primary">
                         </form>
 
+                    </div>
+                    <div class="tab-pane fade" id="tab-bottom-left3">
+                        <div class="alert alert-info alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <strong>Warning!</strong> This Content will show on the CV PDF file so update carefully!!
+                        </div>
+
+                        <form method="POST" action="{{ route('admin.personal.update', $personal->id) }}">
+                            @method('PATCH')
+                            @csrf
+                            <div class="form-group">
+                                <label for="father_name">Father Name:</label>
+                                <input type="text" name="father_name" class="form-control" value="{{ $personal->father_name ? $personal->father_name: '' }}" placeholder="Father Name...">
+                            </div>
+                            <div class="form-group">
+                                <label for="mother_name">Mother Name:</label>
+                                <input type="text" name="mother_name" class="form-control" value="{{ $personal->mother_name ? $personal->mother_name: '' }}" placeholder="Mother Name...">
+                            </div>
+                            <div class="form-group">
+                                <label for="date_of_birth">Date of Birth:</label>
+                                <input type="date" name="date_of_birth" class="form-control" value="{{ $personal->date_of_birth ? $personal->date_of_birth: '' }}" placeholder="Date of Birth">
+                            </div>
+                            <div class="form-group">
+                                <label for="nationality">Nationality:</label>
+                                <input type="text" name="nationality" class="form-control" value="{{ $personal->nationality ? $personal->nationality: '' }}" placeholder="Nationality...">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="merital_status">Merital Status:</label>
+                                <input type="text" name="merital_status" class="form-control" value="{{ $personal->merital_status ? $personal->merital_status: '' }}" placeholder="Merital Status...">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="sex">Sex:</label>
+                                <select class="form-control" name="sex" id="sex">
+                                    <option {{ $personal->sex == "Male" ? 'selected' : ''  }} value="Male">Male</option>
+                                    <option {{ $personal->sex == "Female" ? 'selected' : ''  }} value="Female">Female</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="language">Language:</label>
+                                <input type="text" name="language" class="form-control" value="{{ $personal->language ? $personal->language: '' }}" placeholder="Language...">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone_num">Phone:</label>
+                                <input type="number" name="phone_num" class="form-control" value="{{ $personal->phone_num ? $personal->phone_num : '' }}" placeholder="Phone Number...">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input type="email" name="email" class="form-control" value="{{ $personal->email ? $personal->email : '' }}" placeholder="Email...">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="present_address">Present Address:</label>
+                                <textarea name="present_address" id="present_address" class="form-control" rows="7" placeholder="Present Address...">{{ $personal->present_address ? $personal->present_address : '' }}</textarea>
+                                <p>For line break use <code> {{ '<br/>' }} </code></p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="permanent_address">Permanent Address:</label>
+                                <textarea name="permanent_address" id="permanent_address" class="form-control" rows="7" placeholder="Permanent Address...">{{ $personal->permanent_address ? $personal->permanent_address : '' }}</textarea>
+                                <p>For line break use <code> {{ '<br/>' }} </code></p>
+                            </div>
+                            <input type="hidden" name="id" value="{{ $personal->id }}">
+
+                            <input type="submit" value="Update Information" class="btn btn-primary">
+                        </form>
                     </div>
                 </div>
                 <!-- END TABBED CONTENT -->

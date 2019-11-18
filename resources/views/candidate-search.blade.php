@@ -1,6 +1,6 @@
 @extends('layouts.frontend.master')
 
-@section('title', 'Search')
+@section('title', 'Candidate Search')
 
 @push('css')
 
@@ -12,19 +12,10 @@
         .extra-space{
             padding:250px 0;
         }
-        .search-job .form-group .form-control {
-            padding-left: 30px;
-            display: block;
-            width: 100%;
-            font-size: 14px;
-            border: 1px solid #ffffff;
-            color: #000000 !important;
-            font-weight: bold;
-            background: transparent !important;
-        }
-        .search-job .form-group .form-control::placeholder{
-            color: #000000 !important;
-            font-weight: bold;
+
+        .search-job {
+            background: #ffffff;
+            padding: 20px;
         }
     </style>
 
@@ -36,9 +27,14 @@
     <div class="hero-wrap" style="background-image: url('{{asset ('public/front/assets/images/bg_2.jpg')}}');" data-stellar-background-ratio="0.5">
         <div class="container">
             <div class="row no-gutters slider-text align-items-center justify-content-start" data-scrollax-parent="true">
-                <div class="col-xl-10 ftco-animate mb-5 pb-5 extra-space" data-scrollax=" properties: { translateY: '70%' }">
+                <div class="col-xl-12 ftco-animate mb-5 pb-5 extra-space" data-scrollax=" properties: { translateY: '70%' }">
                     @if($query)
-                        <h1 class="mb-5" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span id="total_num">{{ $userProfiles->count() }}</span> RESULTS FOR <span id="keyword">{{ strtoupper ($query) }}</span></h1>
+                        <h1 class="mb-5" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span id="total_num">{{ $userProfiles->count() }}</span> RESULTS FOR <span id="keyword">@if($query)
+                                    {{ strtoupper ($query) }}
+                                @else($job_role)
+                                    {{ strtoupper ($job_role) }}
+                                @endif
+                            </span></h1>
                     @else
                         <h1>SEARCH EMPLOYER</h1>
                     @endif
@@ -49,7 +45,7 @@
                                     <div class="form-group">
                                         <div class="form-field">
                                             <div class="icon"><span class="icon-user"></span></div>
-                                            <input type="text" onkeyup="search()" name="query" id="query" class="form-control" placeholder="eg. Adam Scott">
+                                            <input type="text" name="query" id="query" class="form-control" placeholder="eg. Adam Scott" value="{{ $query }}">
                                         </div>
                                     </div>
                                 </div>
@@ -58,13 +54,11 @@
                                         <div class="form-field">
                                             <div class="select-wrap">
                                                 <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                                                <select name="" id="" class="form-control">
-                                                    <option value="">Category</option>
-                                                    <option value="">Full Time</option>
-                                                    <option value="">Part Time</option>
-                                                    <option value="">Freelance</option>
-                                                    <option value="">Internship</option>
-                                                    <option value="">Temporary</option>
+                                                <select name="job_role" id="job_role" class="form-control dynamic">
+                                                    @foreach($job_types as $key=>$job_type)
+                                                        <option value="{{ $job_type->id }}" {{ $job_role ==  $job_type->id ? 'selected' : '' }}>{{ $job_type->name }}</option>
+
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
@@ -74,7 +68,7 @@
                                     <div class="form-group">
                                         <div class="form-field">
                                             <div class="icon"><span class="icon-map-marker"></span></div>
-                                            <input type="text" class="form-control" placeholder="Location">
+                                            <input type="text" name="job_location" class="form-control dynamic" placeholder="Location" value="{{ $job_location }}">
                                         </div>
                                     </div>
                                 </div>
@@ -105,7 +99,7 @@
 
             <div class="row">
                 <span id="search-view">
-                    @if($userProfiles)
+                    @if($userProfiles->count() > 0 )
                         @foreach($userProfiles as $userProfile)
                             <div class="col-md-4">
                         <div class="card mb-4 shadow-sm normal-data">
@@ -124,6 +118,8 @@
                         </div>
                     </div>
                         @endforeach
+                        @else
+                        <h1 class="text-center bg-red">There is no persons with this information...</h1>
                     @endif
                 </span>
             </div>
@@ -134,22 +130,7 @@
 
 @push('js')
 
-    <script>
-        function search(){
-            var search = $('#query').val();
-            $('#keyword').text(search);
-            $.ajax({
-                type: 'get',
-                url: '{{ route("live.search") }}',
-                data: {'query' : search},
-                dataType: 'json',
-                success: function(data){
-                    $('#total_num').html(data.total_data);
-                    $('#search-view').html(data.user_data);
-                }
-            });
-        }
-    </script>
+
 
 
 @endpush

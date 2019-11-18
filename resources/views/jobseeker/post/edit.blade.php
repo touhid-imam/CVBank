@@ -94,7 +94,7 @@
                         <div class="form-group">
                             <div class="form-line {{ $errors->has('$categories') ? 'focused error' : '' }}">
                                 <label for="categories">Category:</label>
-                                <select class="selectpicker form-control show-tick" name="categories[]" id="categories" data-live-search="true" multiple>
+                                <select class="selectpicker form-control show-tick" name="category" id="category" data-live-search="true">
                                     @if($categories)
                                         @foreach($categories as $category)
                                             <option value="{{ $category->id }}"

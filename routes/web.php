@@ -30,9 +30,13 @@ Route::get('/user/{slug}/profile-pdf', 'ProfileController@pdfView');
 
 Route::post('/sendmail/send', 'ProfileController@send')->name('sendEmail');
 Route::get('/search', 'SearchController@userSearch')->name('userSearch');
-Route::get('/search/live', 'SearchController@liveSearch')->name('live.search');
+Route::get('/search/jobs', 'SearchController@jobSearch')->name('jobs.search');
 
 Route::get('/user/{username}/pdf', 'ProfileController@pdfMaker')->name('pdfDownload');
+Route::group(['middleware' => ['auth']], function(){
+    route::post('favourite/add', 'FavouriteController@add')->name('jobpost.favourite');
+});
+
 
 Auth::routes(['verify' => true]);
 
@@ -45,6 +49,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
     route::get('profile', 'UserProfile@index')->name('profile');
     route::patch('profile-update', 'UserProfile@profileUpdate')->name('profile.update');
     route::patch('password-update', 'UserProfile@passwordUpdate')->name('password-update');
+    route::patch('personal-update', 'UserProfile@personalUpdate')->name('personal.update');
     route::resource('hobbies-facts', 'HobbyFactController');
     route::resource('resumes', 'ResumesController');
     route::resource ('team', 'TeamController');
@@ -53,6 +58,9 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
     route::resource('post', 'PostController');
     route::resource('work', 'WorkController');
     route::resource('skill', 'SkillController');
+    route::resource('jobs', 'JobPostController');
+    route::put('jobs/{id}/approve', 'JobPostController@jobApproval')->name('jobs.approve');
+    route::put('jobs/{id}/reject', 'JobPostController@jobReject')->name('jobs.reject');
     route::get('messages', 'MessagesController@index')->name('messages');
     route::get('message/{id}', 'MessagesController@show')->name('messageShow');
     route::delete('messages/{message}', 'MessagesController@destroy')->name('messageDelete');
@@ -67,6 +75,7 @@ Route::group(['as' => 'manager.', 'prefix' => 'manager', 'namespace' => 'Manager
 
 
     route::get('dashboard', 'DashboardController@index')->name('dashboard');
+    route::resource('jobs', 'JobPostController');
 
 
 });
@@ -88,6 +97,8 @@ Route::group(['as' => 'jobseeker.', 'prefix' => 'jobseeker', 'namespace' => 'Job
     route::get('messages', 'MessagesController@index')->name('messages');
     route::get('messages/{message}', 'MessagesController@show')->name('messageShow');
     route::delete('messages/{message}', 'MessagesController@destroy')->name('messageDelete');
+    route::get('jobs', 'JobController@index')->name('jobs.index');
+    route::patch('jobs-update', 'JobController@update')->name('job.update');
 
 
 });

@@ -79,7 +79,6 @@ class PostController extends Controller
         $post = new Post();
         $post->user_id = Auth::id ();
         $post->title = $request->title;
-        $post->slug = $slug;
         $post->image = $imageName;
         $post->decs = $request->decs;
         if (isset($request->status)) {
@@ -168,7 +167,6 @@ class PostController extends Controller
 
         $post->user_id = Auth::id ();
         $post->title = $request->title;
-        $post->slug = $slug;
         $post->image = $imageName;
         $post->decs = $request->decs;
         if (isset($request->status)) {

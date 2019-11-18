@@ -5,9 +5,11 @@
     <title>@yield('title') | {{ config('app.name', 'Laravel') }}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900" rel="stylesheet">
 
+    <link rel="stylesheet" href="{{asset ('public/front/assets/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset ('public/front/assets/css/open-iconic-bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset ('public/front/assets/css/animate.css')}}">
 

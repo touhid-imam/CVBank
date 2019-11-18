@@ -2,7 +2,7 @@
 <div class="aside1">
     <a class="contact-button"><i class="fa fa-paper-plane"></i></a>
     <a class="download-button"><i class="fa fa-cloud-download"></i></a>
-    <div class="aside-content"><span class="part1">CVBank</span><span class="part2">Personal Portfolio</span>
+    <div class="aside-content"><span class="part1">{{ $user->name }}</span><span class="part2">Personal Portfolio</span>
     </div>
 </div>
 <aside class="hs-menu" id="hs-menu">

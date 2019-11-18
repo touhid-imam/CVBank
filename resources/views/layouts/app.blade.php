@@ -37,6 +37,9 @@
             top: 14px;
             left: 6px;
         }
+        .auth-box {
+            height: 550px;
+        }
     </style>
 
 </head>
@@ -48,5 +51,7 @@
         </div>
     </div>
 </div>
+<script src="{{asset ('public/front/assets/js/jquery.min.js')}}"></script>
+@stack('script')
 </body>
 </html>

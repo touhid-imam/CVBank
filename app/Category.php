@@ -21,4 +21,8 @@ class Category extends Model
     {
         return $this->belongsToMany ('App\Skill')->withTimestamps ();
     }
+
+    public function jobPosts(){
+        return $this->belongsToMany ('App\JobPost', 'category_jobpost', 'category_id', 'jobpost_id')->withTimestamps ();
+    }
 }

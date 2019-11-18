@@ -40,9 +40,10 @@
                                     <th>No.</th>
                                     <th>Category Name</th>
                                     <th>Post Count</th>
+                                    <th>Job Count</th>
                                     <th>Created At</th>
-                                    <th>Updated At</th>
                                     <th>Action</th>
+
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -51,9 +52,8 @@
                                         <td>{{ $key + 1 }}</td>
                                         <td>{{ $category->name }}</td>
                                         <td>{{ $category->posts->count() }}</td>
-
+                                        <td>{{ $category->jobPosts->count() }}</td>
                                         <td>{{ $category->created_at ? $category->created_at->diffForHumans() : ' ' }}</td>
-                                        <td>{{ $category->updated_at ? $category->updated_at->diffForHumans() : ' ' }}</td>
                                         <td class="text-center" style="padding-left: 5px;">
                                             <ul class="tbl-action-btn">
                                                 <li>
@@ -73,6 +73,7 @@
 
                                             </ul>
                                         </td>
+
                                     </tr>
 
                                     <div class="modal fade" id="myModal-{{ $category->id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -106,8 +107,8 @@
                                     <th>No.</th>
                                     <th>Category Name</th>
                                     <th>Post Count</th>
+                                    <th>Job Count</th>
                                     <th>Created At</th>
-                                    <th>Updated At</th>
                                     <th>Action</th>
                                 </tr>
                                 </tfoot>

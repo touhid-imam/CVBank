@@ -66,6 +66,24 @@
                     @endif
                 </div>
 
+                <div class="form-group">
+                    <label for="job_role" class="control-label sr-only">{{ __('JOB TYPE') }}</label>
+
+                    <select class="form-control{{ $errors->has('job_role') ? ' is-invalid' : '' }}" name="job_role" id="job_role">
+                        <option value="1">{{ "Full Time" }}</option>
+                        <option value="2">{{ "Part Time" }}</option>
+                        <option value="3">{{ "Freelance" }}</option>
+                        <option value="4">{{ "Internship" }}</option>
+                        <option value="5">{{ "Temporary" }}</option>
+                    </select>
+
+                    @if ($errors->has('job_role'))
+                        <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('job_role') }}</strong>
+                                </span>
+                    @endif
+                </div>
+
 
                 <div class="form-group">
                     <label for="password" class="control-label sr-only">{{ __('PASSWORD') }}</label>
@@ -101,4 +119,24 @@
     </div>
     <div class="clearfix"></div>
 </div>
+
 @endsection
+
+@push('script')
+    <script>
+        $(document).ready(function(){
+           var userRole = $('#role_id'),
+               jobRole  = $('#job_role');
+            jobRole.hide();
+
+            userRole.on('change', function(){
+                if(userRole.val() == 2){
+                    jobRole.hide();
+                } else{
+                    jobRole.show();
+                }
+            });
+
+        });
+    </script>
+@endpush
